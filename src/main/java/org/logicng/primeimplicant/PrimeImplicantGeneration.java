@@ -147,7 +147,8 @@ public class PrimeImplicantGeneration {
 
         SortedSet<Literal> compute(final Formula formula) {
             final SortedSet<Variable> variables = formula.variables();
-            // Note: Make formula variables known to solver in advance, otherwise the name-index making gets lost when loading previous solver state
+            // Note: Make formula variables known to solver in advance,
+            // otherwise the name-index mapping gets lost when loading a previous solver state
             newVars(variables);
             final int[] state = saveState();
             add(formula);

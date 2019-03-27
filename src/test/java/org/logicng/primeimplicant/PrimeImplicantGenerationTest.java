@@ -23,6 +23,11 @@ import java.util.TreeSet;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+/**
+ * Unit tests for {@link PrimeImplicantGeneration}.
+ * @version 1.6.0
+ * @since 1.6.0
+ */
 public class PrimeImplicantGenerationTest {
 
     private static final FormulaFactory f = new FormulaFactory();
