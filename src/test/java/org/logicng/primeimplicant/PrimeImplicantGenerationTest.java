@@ -104,6 +104,10 @@ public class PrimeImplicantGenerationTest {
 
     @Test
     public void testSimple() throws ParserException {
+        test(p.parse("$false"), 5);
+        test(p.parse("$true"), 5);
+        test(p.parse("a"), 5);
+        test(p.parse("~a"), 5);
         test(p.parse("a & b & c"), 5);
         test(p.parse("a | b | c"), 5);
         test(p.parse("a & (b | c)"), 5);
