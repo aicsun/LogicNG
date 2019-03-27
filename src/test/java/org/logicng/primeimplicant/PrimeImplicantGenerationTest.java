@@ -45,11 +45,7 @@ public class PrimeImplicantGenerationTest {
     }
 
     private void testAnyPrimeImplicant(final Formula formula) {
-        final long start = System.currentTimeMillis();
         final SortedSet<Literal> primeImplicant = PrimeImplicantGeneration.compute(formula);
-        final long end = System.currentTimeMillis();
-        System.out.println("running time (ms): " + (end - start));
-        System.out.println(primeImplicant);
         if (formula.holds(new SATPredicate(f))) {
             assertThat(primeImplicant).isNotNull();
             testImplicantProperty(primeImplicant, formula);
@@ -77,12 +73,7 @@ public class PrimeImplicantGenerationTest {
             final boolean sat = satSolver.sat() == Tristate.TRUE;
             if (sat) {
                 final SortedSet<Literal> implicant = satSolver.model(formula.variables()).literals();
-                final long start = System.currentTimeMillis();
                 final SortedSet<Literal> primeImplicant = PrimeImplicantGeneration.computeFrom(formula, implicant);
-                final long end = System.currentTimeMillis();
-                System.out.println("running time (ms): " + (end - start));
-                System.out.println(primeImplicant);
-
                 primeImplicants.add(primeImplicant);
                 testImplicantProperty(primeImplicant, formula);
                 testMinimalityProperty(primeImplicant, formula);
