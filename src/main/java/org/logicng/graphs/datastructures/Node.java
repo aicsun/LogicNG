@@ -29,6 +29,7 @@
 package org.logicng.graphs.datastructures;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -113,7 +114,7 @@ public class Node<T> {
     if (o == null || getClass() != o.getClass())
       return false;
     final Node<?> node = (Node<?>) o;
-    return graph.equals(node.graph) && (content != null ? content.equals(node.content) : node.content == null);
+    return graph.equals(node.graph) && Objects.equals(content, node.content);
   }
 
   @Override
