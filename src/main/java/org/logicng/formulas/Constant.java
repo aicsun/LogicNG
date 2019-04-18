@@ -44,9 +44,6 @@ import java.util.TreeSet;
  */
 public abstract class Constant extends Formula {
 
-  private static final SortedSet<Variable> EMPTY_VARIABLE_SET = Collections.unmodifiableSortedSet(new TreeSet<Variable>());
-  private static final SortedSet<Literal> EMPTY_LITERAL_SET = Collections.unmodifiableSortedSet(new TreeSet<Literal>());
-
   private static final Iterator<Formula> ITERATOR = new Iterator<Formula>() {
     @Override
     public boolean hasNext() {
@@ -64,6 +61,8 @@ public abstract class Constant extends Formula {
     }
   };
 
+  private final SortedSet<Literal> literals;
+
   /**
    * Constructor.
    * @param type    the constant type
@@ -71,6 +70,8 @@ public abstract class Constant extends Formula {
    */
   Constant(final FType type, final FormulaFactory factory) {
     super(type, factory);
+    this.variables = Collections.unmodifiableSortedSet(new TreeSet<Variable>());
+    this.literals = Collections.unmodifiableSortedSet(new TreeSet<Literal>());
   }
 
   @Override
@@ -100,12 +101,12 @@ public abstract class Constant extends Formula {
 
   @Override
   public SortedSet<Variable> variables() {
-    return EMPTY_VARIABLE_SET;
+    return variables;
   }
 
   @Override
   public SortedSet<Literal> literals() {
-    return EMPTY_LITERAL_SET;
+    return literals;
   }
 
   @Override
