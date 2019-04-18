@@ -139,16 +139,16 @@ public class UBTree<T extends Comparable<T>> {
             if (node.element().equals(set.first())) {
                 SortedSet<T> remainingSet = new TreeSet<>(set);
                 remainingSet.remove(set.first());
-                if (!remainingSet.isEmpty()) {
-                    allSupersets(remainingSet, node.children(), supersets);
-                } else {
+                if (remainingSet.isEmpty()) {
                     List<UBNode<T>> allEndOfPathNodes = getAllEndOfPathNodes(node.children());
                     if (node.isEndOfPath()) {
                         allEndOfPathNodes.add(node);
                     }
-                    for (UBNode<T> endOfPathNode :allEndOfPathNodes) {
+                    for (UBNode<T> endOfPathNode : allEndOfPathNodes) {
                         supersets.add(endOfPathNode.set());
                     }
+                } else {
+                    allSupersets(remainingSet, node.children(), supersets);
                 }
             }
         }

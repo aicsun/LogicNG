@@ -165,12 +165,12 @@ public abstract class CleaneLingStyleSolver {
      * @param lit the literal
      */
     public void addlit(final int lit) {
-        if (lit != 0) {
-            importLit(lit);
-            this.addedlits.push(lit);
-        } else {
+        if (lit == 0) {
             if (!trivialClause()) { newPushConnectClause(); }
             this.addedlits.clear();
+        } else {
+            importLit(lit);
+            this.addedlits.push(lit);
         }
     }
 

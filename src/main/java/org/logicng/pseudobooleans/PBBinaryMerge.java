@@ -92,9 +92,7 @@ final class PBBinaryMerge implements PBEncoding {
       lits.push(lit);
     final LNGIntVector coeffs = new LNGIntVector(cffs);
     final int maxWeight = maxWeight(coeffs);
-    if (!config.binaryMergeUseGAC)
-      binary_merge(lts, new LNGIntVector(cffs), rhs, maxWeight, lits.size(), formula, null);
-    else {
+    if (config.binaryMergeUseGAC) {
       Literal x;
       boolean encode_complete_constraint = false;
       for (int i = 0; i < lits.size(); i++) {
@@ -133,7 +131,7 @@ final class PBBinaryMerge implements PBEncoding {
       }
       if (config.binaryMergeNoSupportForSingleBit && encode_complete_constraint)
         binary_merge(lts, new LNGIntVector(cffs), rhs, maxWeight, lits.size(), formula, null);
-    }
+    } else binary_merge(lts, new LNGIntVector(cffs), rhs, maxWeight, lits.size(), formula, null);
     return formula;
   }
 
@@ -190,10 +188,10 @@ final class PBBinaryMerge implements PBEncoding {
       }
       if (k <= buckets.get(i).size()) {
         assert k == bucket_card.get(i).size() || config.binaryMergeUseWatchDog;
-        if (gac_lit != null)
-          formula.add(f.clause(gac_lit, bucket_card.get(i).get(k - 1).negate()));
-        else
+        if (gac_lit == null)
           formula.add(f.clause(bucket_card.get(i).get(k - 1).negate()));
+        else
+          formula.add(f.clause(gac_lit, bucket_card.get(i).get(k - 1).negate()));
       }
       if (i > 0) {
         if (carries.size() > 0) {
@@ -207,10 +205,10 @@ final class PBBinaryMerge implements PBEncoding {
               formula.addAll(tempResul.result());
             }
             if (k == bucket_merge.get(i).size() || (config.binaryMergeUseWatchDog && k <= bucket_merge.get(i).size())) {
-              if (gac_lit != null)
-                formula.add(f.clause(gac_lit, bucket_merge.get(i).get(k - 1).negate()));
-              else
+              if (gac_lit == null)
                 formula.add(f.clause(bucket_merge.get(i).get(k - 1).negate()));
+              else
+                formula.add(f.clause(gac_lit, bucket_merge.get(i).get(k - 1).negate()));
             }
           }
         } else

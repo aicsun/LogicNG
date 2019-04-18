@@ -210,15 +210,17 @@ public final class LinearSU extends MaxSAT {
           return MaxSATResult.OPTIMUM;
         } else {
           if (problemType == ProblemType.WEIGHTED) {
-            if (!this.encoder.hasPBEncoding())
-              this.encoder.encodePB(this.solver, this.objFunction, this.coeffs, newCost - 1);
-            else
+            if (this.encoder.hasPBEncoding()) {
               this.encoder.updatePB(this.solver, newCost - 1);
+            } else {
+              this.encoder.encodePB(this.solver, this.objFunction, this.coeffs, newCost - 1);
+            }
           } else {
-            if (!this.encoder.hasCardEncoding())
-              this.encoder.encodeCardinality(this.solver, this.objFunction, newCost - 1);
-            else
+            if (this.encoder.hasCardEncoding()) {
               this.encoder.updateCardinality(this.solver, newCost - 1);
+            } else {
+              this.encoder.encodeCardinality(this.solver, this.objFunction, newCost - 1);
+            }
           }
           ubCost = newCost;
           if (!foundUpperBound(ubCost, null))

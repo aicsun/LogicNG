@@ -441,13 +441,13 @@ public final class MiniCard extends MiniSatStyleSolver {
           outConflict.push(not(trail.get(i)));
         } else {
           final MSClause c = v.reason();
-          if (!c.isAtMost()) {
-            for (int j = 1; j < c.size(); j++)
-              if (v(c.get(j)).level() > 0)
-                seen.set(var(c.get(j)), true);
-          } else {
+          if (c.isAtMost()) {
             for (int j = 0; j < c.size(); j++)
               if (value(c.get(j)) == Tristate.TRUE && v(c.get(j)).level() > 0)
+                seen.set(var(c.get(j)), true);
+          } else {
+            for (int j = 1; j < c.size(); j++)
+              if (v(c.get(j)).level() > 0)
                 seen.set(var(c.get(j)), true);
           }
         }

@@ -331,10 +331,10 @@ public final class PBConstraint extends Formula {
       Pair<Integer, Integer> consts = var2consts.get(x);
       if (consts == null)
         consts = new Pair<>(0, 0);
-      if (!ps.get(i).phase())
-        var2consts.put(x, new Pair<>(consts.first() + cs.get(i), consts.second()));
-      else
+      if (ps.get(i).phase())
         var2consts.put(x, new Pair<>(consts.first(), consts.second() + cs.get(i)));
+      else
+        var2consts.put(x, new Pair<>(consts.first() + cs.get(i), consts.second()));
     }
     final LNGVector<Pair<Integer, Literal>> csps = new LNGVector<>(var2consts.size());
     for (final Map.Entry<Literal, Pair<Integer, Integer>> all : var2consts.entrySet()) {
@@ -351,12 +351,13 @@ public final class PBConstraint extends Formula {
     cs.clear();
     ps.clear();
     for (final Pair<Integer, Literal> pair : csps) {
-      if (pair.first() != 0) {
+      if (pair.first() == 0) {
+        zeros++;
+      } else {
         cs.push(pair.first());
         ps.push(pair.second());
         sum += cs.back();
-      } else
-        zeros++;
+      }
     }
     ps.removeElements(ps.size() - csps.size() - zeros);
     cs.removeElements(cs.size() - csps.size() - zeros);

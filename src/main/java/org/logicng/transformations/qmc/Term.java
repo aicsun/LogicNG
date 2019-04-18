@@ -147,10 +147,10 @@ class Term {
     int diffPosition = -1;
     for (int i = 0; i < this.bits.length; i++)
       if (this.bits[i] != other.bits[i]) {
-        if (diffPosition != -1)
-          return null;
-        else
+        if (diffPosition == -1)
           diffPosition = i;
+        else
+          return null;
       }
     if (diffPosition == -1)
       return null;

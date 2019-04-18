@@ -120,12 +120,14 @@ public final class CleaneLingSolver extends CleaneLingStyleSolver {
     @Override
     public void addlit(final int lit) {
         this.original.push(lit);
-        if (lit != 0) {
+        if (lit == 0) {
+            if (!trivialClause()) {
+                newPushConnectClause();
+            }
+            this.addedlits.clear();
+        } else {
             importLit(lit);
             this.addedlits.push(lit);
-        } else {
-            if (!trivialClause()) { newPushConnectClause(); }
-            this.addedlits.clear();
         }
     }
 
@@ -265,15 +267,23 @@ public final class CleaneLingSolver extends CleaneLingStyleSolver {
 
         if (this.limits.searchInc == 0) { this.limits.searchInc = this.config.searchint; }
         assert this.limits.searchInc != 0;
-        if (this.limits.searchConflicts != 0) {
+        if (this.limits.searchConflicts == 0) {
+            assert !this.config.searchfirst;
+        } else {
             int inc = this.limits.searchInc;
             final long removed = this.limits.simpRemovedVars;
             if (removed > 0 && remainingVars() != 0) {
                 final long reduction = (100 * removed) / remainingVars();
-                if (reduction > 1) { inc /= reduction; }
+                if (reduction > 1) {
+                    inc /= reduction;
+                }
             }
-            if (this.limits.searchInc >= Integer.MAX_VALUE - inc) { this.limits.searchInc = Integer.MAX_VALUE; } else { this.limits.searchInc += inc; }
-        } else { assert !this.config.searchfirst; }
+            if (this.limits.searchInc >= Integer.MAX_VALUE - inc) {
+                this.limits.searchInc = Integer.MAX_VALUE;
+            } else {
+                this.limits.searchInc += inc;
+            }
+        }
         this.limits.searchConflicts = this.limits.searchInc;
     }
 
@@ -330,7 +340,11 @@ public final class CleaneLingSolver extends CleaneLingStyleSolver {
                 break;
             }
             if (tmp == VALUE_UNASSIGNED) {
-                if (lit != 0) { ignore = true; } else { lit = other; }
+                if (lit == 0) {
+                    lit = other;
+                } else {
+                    ignore = true;
+                }
             }
         }
         if (!ignore) {
@@ -388,15 +402,21 @@ public final class CleaneLingSolver extends CleaneLingStyleSolver {
                         if (val(other) >= 0) { break; }
                     }
                     if (p == clause.size()) { other = 0; }
-                    if (other != 0) {
+                    if (other == 0) {
+                        other = clause.lits().get(0);
+                        v = val(other);
+                        if (v == VALUE_FALSE) {
+                            conflict = clause;
+                        } else if (v != VALUE_TRUE) {
+                            assign(other, clause);
+                        } else {
+                            newWS.back().setBlit(other);
+                        }
+                    } else {
                         clause.lits().set(p, lit);
                         clause.lits().set(1, other);
                         addWatch(other, clause.lits().get(0), false, clause);
                         newWS.pop();
-                    } else {
-                        other = clause.lits().get(0);
-                        v = val(other);
-                        if (v == VALUE_FALSE) { conflict = clause; } else if (v != VALUE_TRUE) { assign(other, clause); } else { newWS.back().setBlit(other); }
                     }
                 }
             }
@@ -474,7 +494,11 @@ public final class CleaneLingSolver extends CleaneLingStyleSolver {
         int nextDecision = 0;
         while (nextDecision == 0 && !this.decisions.empty()) {
             final int lit = this.decisions.top();
-            if (val(lit) != 0) { this.decisions.pop(lit); } else { nextDecision = lit; }
+            if (val(lit) == 0) {
+                nextDecision = lit;
+            } else {
+                this.decisions.pop(lit);
+            }
         }
         if (nextDecision != 0) {
             int newLevel;
@@ -942,12 +966,12 @@ public final class CleaneLingSolver extends CleaneLingStyleSolver {
                 negated = lit;
             }
             if (count != 0) { continue; }
-            if (negated != 0) {
-                this.tostrengthen.push(new Pair<>(d, negated));
-                this.stats.backwardStrengthened++;
-            } else {
+            if (negated == 0) {
                 this.stats.backwardSubsumed++;
                 dumpClause(d);
+            } else {
+                this.tostrengthen.push(new Pair<>(d, negated));
+                this.stats.backwardStrengthened++;
             }
         }
         unmark();

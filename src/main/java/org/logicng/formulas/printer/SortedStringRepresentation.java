@@ -194,17 +194,17 @@ public final class SortedStringRepresentation extends DefaultStringRepresentatio
         final String mul = pbMul();
         final String add = pbAdd();
         for (int i = 0; i < sortedOperands.size() - 1; i++) {
-            if (sortedCoefficients.get(i) != 1) {
-                sb.append(sortedCoefficients.get(i)).append(mul).append(sortedOperands.get(i)).append(add);
-            } else {
+            if (sortedCoefficients.get(i) == 1) {
                 sb.append(sortedOperands.get(i)).append(add);
+            } else {
+                sb.append(sortedCoefficients.get(i)).append(mul).append(sortedOperands.get(i)).append(add);
             }
         }
         if (sortedOperands.size() > 0) {
-            if (sortedCoefficients.get(sortedOperands.size() - 1) != 1) {
-                sb.append(sortedCoefficients.get(sortedOperands.size() - 1)).append(mul).append(sortedOperands.get(sortedOperands.size() - 1));
-            } else {
+            if (sortedCoefficients.get(sortedOperands.size() - 1) == 1) {
                 sb.append(sortedOperands.get(sortedOperands.size() - 1));
+            } else {
+                sb.append(sortedCoefficients.get(sortedOperands.size() - 1)).append(mul).append(sortedOperands.get(sortedOperands.size() - 1));
             }
         }
         return sb.toString();

@@ -75,12 +75,12 @@ public class Assignment {
   public Assignment(final boolean fastEvaluable) {
     this.fastEvaluable = fastEvaluable;
     this.negVars = new ArrayList<>();
-    if (!fastEvaluable) {
-      this.pos = new ArrayList<>();
-      this.neg = new ArrayList<>();
-    } else {
+    if (fastEvaluable) {
       this.pos = new HashSet<>();
       this.neg = new HashSet<>();
+    } else {
+      this.pos = new ArrayList<>();
+      this.neg = new ArrayList<>();
     }
   }
 

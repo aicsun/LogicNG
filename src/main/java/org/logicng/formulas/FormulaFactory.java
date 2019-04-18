@@ -128,14 +128,14 @@ public class FormulaFactory {
     this.configurations = new EnumMap<>(ConfigurationType.class);
     this.cnfEncoder = new CNFEncoder(this);
     this.subformulaFunction = new SubNodeFunction();
-    if (!name.isEmpty()) {
-      this.ccPrefix = CC_PREFIX + name + "_";
-      this.pbPrefix = PB_PREFIX + name + "_";
-      this.cnfPrefix = CNF_PREFIX + name + "_";
-    } else {
+    if (name.isEmpty()) {
       this.ccPrefix = CC_PREFIX;
       this.pbPrefix = PB_PREFIX;
       this.cnfPrefix = CNF_PREFIX;
+    } else {
+      this.ccPrefix = CC_PREFIX + name + "_";
+      this.pbPrefix = PB_PREFIX + name + "_";
+      this.cnfPrefix = CNF_PREFIX + name + "_";
     }
     this.pbEncoder = new PBEncoder(this);
     this.parser = new PseudoBooleanParser(this);

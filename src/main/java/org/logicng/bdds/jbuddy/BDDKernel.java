@@ -546,14 +546,14 @@ public final class BDDKernel {
     this.freenum = 0;
     for (int n = this.nodesize - 1; n >= 2; n--) {
       final BddNode node = this.nodes[n];
-      if (node.low != -1) {
-        final int hash = nodehash(node.level, node.low, node.high);
-        node.next = this.nodes[hash].hash;
-        this.nodes[hash].hash = n;
-      } else {
+      if (node.low == -1) {
         node.next = this.freepos;
         this.freepos = n;
         this.freenum++;
+      } else {
+        final int hash = nodehash(node.level, node.low, node.high);
+        node.next = this.nodes[hash].hash;
+        this.nodes[hash].hash = n;
       }
     }
   }
@@ -871,16 +871,16 @@ public final class BDDKernel {
   private int fullSatOneRec(final int r) {
     if (r < 2)
       return r;
-    if (low(r) != 0) {
-      int res = fullSatOneRec(low(r));
-      for (int v = level(low(r)) - 1; v > level(r); v--)
-        res = pushRef(makeNode(v, res, 0));
-      return pushRef(makeNode(level(r), res, 0));
-    } else {
+    if (low(r) == 0) {
       int res = fullSatOneRec(high(r));
       for (int v = level(high(r)) - 1; v > level(r); v--)
         res = pushRef(makeNode(v, res, 0));
       return pushRef(makeNode(level(r), 0, res));
+    } else {
+      int res = fullSatOneRec(low(r));
+      for (int v = level(low(r)) - 1; v > level(r); v--)
+        res = pushRef(makeNode(v, res, 0));
+      return pushRef(makeNode(level(r), res, 0));
     }
   }
 

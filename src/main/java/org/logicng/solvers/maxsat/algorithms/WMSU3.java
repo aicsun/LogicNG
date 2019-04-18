@@ -229,11 +229,11 @@ public final class WMSU3 extends MaxSAT {
           lbCost++;
         if (verbosity != Verbosity.NONE)
           this.output.println("c LB : " + lbCost);
-        if (!this.encoder.hasPBEncoding())
-          this.encoder.incEncodePB(this.solver, this.objFunction, this.coeffs, lbCost, this.assumptions, nSoft());
-        else {
+        if (this.encoder.hasPBEncoding()) {
           this.encoder.incUpdatePB(this.solver, this.objFunction, this.coeffs, lbCost);
           this.encoder.incUpdatePBAssumptions(this.assumptions);
+        } else {
+          this.encoder.incEncodePB(this.solver, this.objFunction, this.coeffs, lbCost, this.assumptions, nSoft());
         }
       }
     }

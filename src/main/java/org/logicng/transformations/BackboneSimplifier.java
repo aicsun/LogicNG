@@ -48,13 +48,13 @@ public class BackboneSimplifier implements FormulaTransformation {
         if (backbone == null) {
             return formula.factory().falsum();
         }
-        if (!backbone.getNegativeBackbone().isEmpty() || !backbone.getPositiveBackbone().isEmpty()) {
+        if (backbone.getNegativeBackbone().isEmpty() && backbone.getPositiveBackbone().isEmpty()) {
+            return formula;
+        } else {
             final Formula backboneFormula = backbone.toFormula(formula.factory());
             final Assignment assignment = new Assignment(backbone.getCompleteBackbone());
             final Formula restrictedFormula = formula.restrict(assignment);
             return formula.factory().and(backboneFormula, restrictedFormula);
-        } else {
-            return formula;
         }
     }
 }

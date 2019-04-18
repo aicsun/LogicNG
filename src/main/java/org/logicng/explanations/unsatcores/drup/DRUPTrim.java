@@ -96,12 +96,12 @@ public final class DRUPTrim {
     final DRUPResult result = new DRUPResult();
     Solver s = new Solver(originalProblem, proof);
     boolean parseReturnValue = s.parse();
-    if (!parseReturnValue) {
-      result.trivialUnsat = true;
-      result.unsatCore = new LNGVector<>();
-    } else {
+    if (parseReturnValue) {
       result.trivialUnsat = false;
       result.unsatCore = s.verify();
+    } else {
+      result.trivialUnsat = true;
+      result.unsatCore = new LNGVector<>();
     }
     return result;
   }

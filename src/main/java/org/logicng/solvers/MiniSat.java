@@ -370,7 +370,13 @@ public final class MiniSat extends SATSolver {
    */
   private LNGIntVector generateBlockingClause(final LNGBooleanVector modelFromSolver, final LNGIntVector relevantVars) {
     final LNGIntVector blockingClause;
-    if (relevantVars != null) {
+    if (relevantVars == null) {
+      blockingClause = new LNGIntVector(modelFromSolver.size());
+      for (int i = 0; i < modelFromSolver.size(); i++) {
+        final boolean varAssignment = modelFromSolver.get(i);
+        blockingClause.push(varAssignment ? (i * 2) ^ 1 : i * 2);
+      }
+    } else {
       blockingClause = new LNGIntVector(relevantVars.size());
       for (int i = 0; i < relevantVars.size(); i++) {
         final int varIndex = relevantVars.get(i);
@@ -378,12 +384,6 @@ public final class MiniSat extends SATSolver {
           final boolean varAssignment = modelFromSolver.get(varIndex);
           blockingClause.push(varAssignment ? (varIndex * 2) ^ 1 : varIndex * 2);
         }
-      }
-    } else {
-      blockingClause = new LNGIntVector(modelFromSolver.size());
-      for (int i = 0; i < modelFromSolver.size(); i++) {
-        final boolean varAssignment = modelFromSolver.get(i);
-        blockingClause.push(varAssignment ? (i * 2) ^ 1 : i * 2);
       }
     }
     return blockingClause;

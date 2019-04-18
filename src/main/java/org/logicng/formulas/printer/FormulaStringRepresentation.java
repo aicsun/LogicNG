@@ -142,17 +142,17 @@ public abstract class FormulaStringRepresentation {
         final String mul = this.pbMul();
         final String add = this.pbAdd();
         for (int i = 0; i < operands.length - 1; i++) {
-            if (coefficients[i] != 1) {
-                sb.append(coefficients[i]).append(mul).append(operands[i]).append(add);
-            } else {
+            if (coefficients[i] == 1) {
                 sb.append(operands[i]).append(add);
+            } else {
+                sb.append(coefficients[i]).append(mul).append(operands[i]).append(add);
             }
         }
         if (operands.length > 0) {
-            if (coefficients[operands.length - 1] != 1) {
-                sb.append(coefficients[operands.length - 1]).append(mul).append(operands[operands.length - 1]);
-            } else {
+            if (coefficients[operands.length - 1] == 1) {
                 sb.append(operands[operands.length - 1]);
+            } else {
+                sb.append(coefficients[operands.length - 1]).append(mul).append(operands[operands.length - 1]);
             }
         }
         return sb.toString();

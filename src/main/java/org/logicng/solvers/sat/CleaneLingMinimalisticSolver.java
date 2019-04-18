@@ -205,7 +205,11 @@ public final class CleaneLingMinimalisticSolver extends CleaneLingStyleSolver {
                 break;
             }
             if (tmp == VALUE_UNASSIGNED) {
-                if (lit != 0) { ignore = true; } else { lit = other; }
+                if (lit == 0) {
+                    lit = other;
+                } else {
+                    ignore = true;
+                }
             }
         }
         if (!ignore) {
@@ -245,15 +249,21 @@ public final class CleaneLingMinimalisticSolver extends CleaneLingStyleSolver {
                         if (val(other) >= 0) { break; }
                     }
                     if (p == clause.size()) { other = 0; }
-                    if (other != 0) {
+                    if (other == 0) {
+                        other = clause.lits().get(0);
+                        v = val(other);
+                        if (v == VALUE_FALSE) {
+                            conflict = clause;
+                        } else if (v != VALUE_TRUE) {
+                            assign(other, clause);
+                        } else {
+                            newWS.back().setBlit(other);
+                        }
+                    } else {
                         clause.lits().set(p, lit);
                         clause.lits().set(1, other);
                         addWatch(other, clause.lits().get(0), false, clause);
                         newWS.pop();
-                    } else {
-                        other = clause.lits().get(0);
-                        v = val(other);
-                        if (v == VALUE_FALSE) { conflict = clause; } else if (v != VALUE_TRUE) { assign(other, clause); } else { newWS.back().setBlit(other); }
                     }
                 }
             }
@@ -315,7 +325,11 @@ public final class CleaneLingMinimalisticSolver extends CleaneLingStyleSolver {
         int nextDecision = 0;
         while (nextDecision == 0 && !this.decisions.empty()) {
             final int lit = this.decisions.top();
-            if (val(lit) != 0) { this.decisions.pop(lit); } else { nextDecision = lit; }
+            if (val(lit) == 0) {
+                nextDecision = lit;
+            } else {
+                this.decisions.pop(lit);
+            }
         }
         if (nextDecision != 0) {
             int newLevel;

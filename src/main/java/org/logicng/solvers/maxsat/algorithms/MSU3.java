@@ -252,14 +252,15 @@ public final class MSU3 extends MaxSAT {
             assumptions.push(not(softClauses.get(i).assumptionVar()));
         if (verbosity != Verbosity.NONE)
           this.output.println(String.format("c Relaxed soft clauses %d / %d", currentObjFunction.size(), this.objFunction.size()));
-        if (!this.encoder.hasCardEncoding()) {
+        if (this.encoder.hasCardEncoding()) {
+          this.encoder.incUpdateCardinality(this.solver, joinObjFunction, currentObjFunction, lbCost, encodingAssumptions);
+        } else {
           if (lbCost != currentObjFunction.size()) {
             this.encoder.buildCardinality(this.solver, currentObjFunction, lbCost);
             joinObjFunction.clear();
             this.encoder.incUpdateCardinality(this.solver, joinObjFunction, currentObjFunction, lbCost, encodingAssumptions);
           }
-        } else
-          this.encoder.incUpdateCardinality(this.solver, joinObjFunction, currentObjFunction, lbCost, encodingAssumptions);
+        }
         for (int i = 0; i < encodingAssumptions.size(); i++)
           assumptions.push(encodingAssumptions.get(i));
       }
