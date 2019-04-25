@@ -43,6 +43,8 @@ import java.util.SortedSet;
 
 /**
  * Super class for formulas.
+ * <p>
+ * A formula is immutable: A formulas state cannot change after it is constructed.
  * @version 1.2
  * @since 1.0
  */
