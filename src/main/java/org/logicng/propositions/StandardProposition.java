@@ -57,7 +57,7 @@ public final class StandardProposition extends Proposition {
 
   /**
    * Constructs a new standard proposition for a single formula.
-   * @param description the description
+   * @param description the description. If {@code null} an empty description will be created.
    * @param formula     the formula
    */
   public StandardProposition(final String description, final Formula formula) {
@@ -67,7 +67,7 @@ public final class StandardProposition extends Proposition {
 
   /**
    * Constructs a new proposition for a collection of formulas.
-   * @param description the description
+   * @param description the description. If {@code null} an empty description will be created.
    * @param formulas    the formulas
    */
   public StandardProposition(final String description, final Collection<? extends Formula> formulas) {
@@ -77,7 +77,7 @@ public final class StandardProposition extends Proposition {
 
   /**
    * Constructs a new proposition for a variable number of formulas.
-   * @param description the description
+   * @param description the description. If {@code null} an empty description will be created.
    * @param formulas    the formulas
    */
   public StandardProposition(final String description, final Formula... formulas) {
@@ -87,7 +87,7 @@ public final class StandardProposition extends Proposition {
 
   /**
    * Constructs a new proposition for a immutable formula list.
-   * @param description the description
+   * @param description the description. If {@code null} an empty description will be created.
    * @param formulas    the formulas
    */
   public StandardProposition(final String description, final ImmutableFormulaList formulas) {
