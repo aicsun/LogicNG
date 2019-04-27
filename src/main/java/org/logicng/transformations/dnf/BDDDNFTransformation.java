@@ -26,26 +26,24 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.transformations.cnf;
+package org.logicng.transformations.dnf;
 
 import org.logicng.bdds.BDDFactory;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaTransformation;
-import org.logicng.predicates.CNFPredicate;
-import org.logicng.transformations.UnitPropagation;
+import org.logicng.predicates.DNFPredicate;
 
 import static org.logicng.formulas.FType.LITERAL;
-import static org.logicng.formulas.cache.TransformationCacheEntry.BDD_CNF;
+import static org.logicng.formulas.cache.TransformationCacheEntry.BDD_DNF;
 
 /**
- * Transformation of a formula in CNF by converting it to a BDD.
- * @version 1.4.0
- * @since 1.4.0
+ * Transformation of a formula in DNF by converting it to a BDD.
+ * @version 1.6.0
+ * @since 1.6.0
  */
-public final class BDDCNFTransformation implements FormulaTransformation {
+public final class BDDDNFTransformation implements FormulaTransformation {
 
-  private final CNFPredicate cnfPredicate = new CNFPredicate();
-  private final UnitPropagation up = new UnitPropagation();
+  private final DNFPredicate dnfPredicate = new DNFPredicate();
   private BDDFactory bddFactory;
   private final boolean externalFactory;
   private int numNodes;
@@ -53,29 +51,29 @@ public final class BDDCNFTransformation implements FormulaTransformation {
 
 
   /**
-   * Constructs a new BDD-based CNF transformation with a given BDD factory
+   * Constructs a new BDD-based DNF transformation with a given BDD factory
    * @param factory the BDD factory
    */
-  public BDDCNFTransformation(final BDDFactory factory) {
+  public BDDDNFTransformation(final BDDFactory factory) {
     this.bddFactory = factory;
     this.externalFactory = true;
   }
 
   /**
-   * Constructs a new BDD-based CNF transformation with a given number of nodes and cache size for the BDD factory.
+   * Constructs a new BDD-based DNF transformation with a given number of nodes and cache size for the BDD factory.
    * @param numNodes  the number of nodes
    * @param cacheSize the cache size
    */
-  public BDDCNFTransformation(final int numNodes, final int cacheSize) {
+  public BDDDNFTransformation(final int numNodes, final int cacheSize) {
     this.numNodes = numNodes;
     this.cacheSize = cacheSize;
     this.externalFactory = false;
   }
 
   /**
-   * Constructs a new BDD-based CNF transformation and determines the node size and cache size on its own.
+   * Constructs a new BDD-based DNF transformation and determines the node size and cache size on its own.
    */
-  public BDDCNFTransformation() {
+  public BDDDNFTransformation() {
     this(0, 0);
   }
 
@@ -83,9 +81,9 @@ public final class BDDCNFTransformation implements FormulaTransformation {
   public Formula apply(final Formula formula, final boolean cache) {
     if (formula.type().precedence() >= LITERAL.precedence())
       return formula;
-    if (formula.holds(this.cnfPredicate))
+    if (formula.holds(this.dnfPredicate))
       return formula;
-    final Formula cached = formula.transformationCacheEntry(BDD_CNF);
+    final Formula cached = formula.transformationCacheEntry(BDD_DNF);
     if (cache && cached != null)
       return cached;
     if (!this.externalFactory) {
@@ -95,9 +93,9 @@ public final class BDDCNFTransformation implements FormulaTransformation {
       this.bddFactory = new BDDFactory(nodes, cacheSize, formula.factory());
       this.bddFactory.setNumberOfVars(numVars);
     }
-    final Formula cnf = this.bddFactory.build(formula).cnf().transform(this.up);
+    final Formula dnf = this.bddFactory.build(formula).dnf();
     if (cache)
-      formula.setTransformationCacheEntry(BDD_CNF, cnf);
-    return cnf;
+      formula.setTransformationCacheEntry(BDD_DNF, dnf);
+    return dnf;
   }
 }
