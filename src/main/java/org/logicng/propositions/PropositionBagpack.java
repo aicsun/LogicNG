@@ -29,8 +29,8 @@
 package org.logicng.propositions;
 
 /**
- * The type for a proposition bagpack.  An object of a class implementing this interface can be added to a proposition
- * in order to transport additional information.
+ * The type for a proposition bagpack.  An object of a class implementing this interface can be added to an
+ * extended proposition in order to transport additional information.
  * @version 1.0
  * @since 1.0
  */

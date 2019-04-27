@@ -33,7 +33,7 @@ import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaFactory;
 
 /**
- * An interface for a proposition in LogicNG.  A proposition is a collection of formulas with a additional information
+ * An interface for a proposition in LogicNG.  A proposition is a collection of formulas with an additional information
  * like a textual description or a user-provided object.
  * @version 1.0
  * @since 1.0

@@ -36,7 +36,8 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * A proposition in LogicNG.  A proposition is a collection of formulas with an additional textual description.
+ * A standard proposition in LogicNG.  A standard proposition is a collection of formulas with an additional textual
+ * description.
  * @version 1.1
  * @since 1.0
  */
@@ -46,8 +47,8 @@ public final class StandardProposition extends Proposition {
   private final String description;
 
   /**
-   * Constructs a new proposition for a single formulas.
-   * @param formula the formulas
+   * Constructs a new standard proposition for a single formula with an empty description.
+   * @param formula the formula
    */
   public StandardProposition(final Formula formula) {
     this.formulas = new ImmutableFormulaList(FType.AND, formula);
@@ -55,9 +56,9 @@ public final class StandardProposition extends Proposition {
   }
 
   /**
-   * Constructs a new proposition for a single formulas.
+   * Constructs a new standard proposition for a single formula.
    * @param description the description
-   * @param formula     the formulas
+   * @param formula     the formula
    */
   public StandardProposition(final String description, final Formula formula) {
     this.formulas = new ImmutableFormulaList(FType.AND, formula);
