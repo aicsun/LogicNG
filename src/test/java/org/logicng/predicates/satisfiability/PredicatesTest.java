@@ -52,6 +52,7 @@ public class PredicatesTest {
 
   private final FormulaFactory f = new FormulaFactory();
   private final FormulaPredicate sat = new SATPredicate(f);
+  private final FormulaPredicate fal = new FalsifiabilityPredicate(f);
   private final FormulaPredicate ctr = new ContradictionPredicate(f);
   private final FormulaPredicate tau = new TautologyPredicate(f);
   private final FormulaPredicate con = new ContingencyPredicate(f);
@@ -59,6 +60,7 @@ public class PredicatesTest {
   @Test
   public void testTrue() {
     Assert.assertTrue(F.TRUE.holds(sat));
+    Assert.assertFalse(F.TRUE.holds(fal));
     Assert.assertFalse(F.TRUE.holds(ctr));
     Assert.assertTrue(F.TRUE.holds(tau));
     Assert.assertFalse(F.TRUE.holds(con));
@@ -67,6 +69,7 @@ public class PredicatesTest {
   @Test
   public void testFalse() {
     Assert.assertFalse(F.FALSE.holds(sat));
+    Assert.assertTrue(F.FALSE.holds(fal));
     Assert.assertTrue(F.FALSE.holds(ctr));
     Assert.assertFalse(F.FALSE.holds(tau));
     Assert.assertFalse(F.FALSE.holds(con));
@@ -75,10 +78,12 @@ public class PredicatesTest {
   @Test
   public void testLiterals() {
     Assert.assertTrue(F.A.holds(sat));
+    Assert.assertTrue(F.A.holds(fal));
     Assert.assertFalse(F.A.holds(ctr));
     Assert.assertFalse(F.A.holds(tau));
     Assert.assertTrue(F.A.holds(con));
     Assert.assertTrue(F.NA.holds(sat));
+    Assert.assertTrue(F.NA.holds(fal));
     Assert.assertFalse(F.NA.holds(ctr));
     Assert.assertFalse(F.NA.holds(tau));
     Assert.assertTrue(F.NA.holds(con));
@@ -87,10 +92,12 @@ public class PredicatesTest {
   @Test
   public void testOther() {
     Assert.assertTrue(F.AND1.holds(sat));
+    Assert.assertTrue(F.AND1.holds(fal));
     Assert.assertFalse(F.AND1.holds(ctr));
     Assert.assertFalse(F.AND1.holds(tau));
     Assert.assertTrue(F.AND1.holds(con));
     Assert.assertTrue(F.NOT2.holds(sat));
+    Assert.assertTrue(F.NOT2.holds(fal));
     Assert.assertFalse(F.NOT2.holds(ctr));
     Assert.assertFalse(F.NOT2.holds(tau));
     Assert.assertTrue(F.NOT2.holds(con));
@@ -101,6 +108,7 @@ public class PredicatesTest {
     final FormulaFactory f = F.f;
     final Formula taut = f.or(F.AND1, f.and(F.NA, F.B), f.and(F.A, F.NB), f.and(F.NA, F.NB));
     Assert.assertTrue(taut.holds(sat));
+    Assert.assertFalse(taut.holds(fal));
     Assert.assertFalse(taut.holds(ctr));
     Assert.assertTrue(taut.holds(tau));
     Assert.assertFalse(taut.holds(con));
@@ -111,6 +119,7 @@ public class PredicatesTest {
     final FormulaFactory f = F.f;
     final Formula cont = f.and(F.OR1, f.or(F.NX, F.Y), f.or(F.X, F.NY), f.or(F.NX, F.NY));
     Assert.assertFalse(cont.holds(sat));
+    Assert.assertTrue(cont.holds(fal));
     Assert.assertTrue(cont.holds(ctr));
     Assert.assertFalse(cont.holds(tau));
     Assert.assertFalse(cont.holds(con));
@@ -145,12 +154,15 @@ public class PredicatesTest {
     final Formula satDNF = f.or(f.and(a, b), f.and(b, c), f.and(d, a));
     Assert.assertTrue(satDNF.holds(sat, false));
     Assert.assertEquals(Tristate.UNDEF, satDNF.predicateCacheEntry(IS_SAT));
+    satDNF.holds(fal, false);
+    Assert.assertEquals(Tristate.UNDEF, satDNF.negate().predicateCacheEntry(IS_SAT));
   }
 
   @Test
   public void testToString() {
     final SATSolver s = MiniSat.miniSat(f);
     Assert.assertEquals("SATPredicate", new SATPredicate(s).toString());
+    Assert.assertEquals("FalsifiabilityPredicate", new FalsifiabilityPredicate(s).toString());
     Assert.assertEquals("TautologyPredicate", new TautologyPredicate(s).toString());
     Assert.assertEquals("ContradictionPredicate", new ContradictionPredicate(s).toString());
     Assert.assertEquals("ContingencyPredicate", new ContingencyPredicate(s).toString());
