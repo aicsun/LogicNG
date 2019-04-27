@@ -30,7 +30,7 @@ package org.logicng.formulas.cache;
 
 /**
  * The pre-defined transformation cache entries.
- * @version 1.3
+ * @version 1.6.0
  * @since 1.0
  */
 public enum TransformationCacheEntry implements CacheEntry {
