@@ -4,9 +4,11 @@ import org.logicng.formulas.Formula;
 import org.logicng.formulas.Literal;
 import org.logicng.formulas.Variable;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * A class which contains utility methods for {@link Formula} objects.
@@ -27,12 +29,8 @@ public class FormulaHelper {
      * @param formulas formulas
      * @return all variables occurring in the given formulas
      */
-    public static SortedSet<Variable> variables(Formula... formulas) {
-        SortedSet<Variable> variables = new TreeSet<>();
-        for (Formula f : formulas) {
-            variables.addAll(f.variables());
-        }
-        return variables;
+    public static SortedSet<Variable> variables(final Formula... formulas) {
+        return Arrays.stream(formulas).map(Formula::variables).flatMap(Collection::stream).collect(Collectors.toCollection(TreeSet::new));
     }
 
     /**
@@ -40,12 +38,8 @@ public class FormulaHelper {
      * @param formulas formulas
      * @return all variables occurring in the given formulas
      */
-    public static SortedSet<Variable> variables(Collection<? extends Formula> formulas) {
-        SortedSet<Variable> variables = new TreeSet<>();
-        for (Formula f : formulas) {
-            variables.addAll(f.variables());
-        }
-        return variables;
+    public static SortedSet<Variable> variables(final Collection<? extends Formula> formulas) {
+        return formulas.stream().map(Formula::variables).flatMap(Collection::stream).collect(Collectors.toCollection(TreeSet::new));
     }
 
     /**
@@ -53,12 +47,8 @@ public class FormulaHelper {
      * @param formulas formulas
      * @return all literals occurring in the given formulas
      */
-    public static SortedSet<Literal> literals(Formula... formulas) {
-        SortedSet<Literal> literals = new TreeSet<>();
-        for (Formula f : formulas) {
-            literals.addAll(f.literals());
-        }
-        return literals;
+    public static SortedSet<Literal> literals(final Formula... formulas) {
+        return Arrays.stream(formulas).map(Formula::literals).flatMap(Collection::stream).collect(Collectors.toCollection(TreeSet::new));
     }
 
     /**
@@ -66,11 +56,7 @@ public class FormulaHelper {
      * @param formulas formulas
      * @return all literals occurring in the given formulas
      */
-    public static SortedSet<Literal> literals(Collection<? extends Formula> formulas) {
-        SortedSet<Literal> literals = new TreeSet<>();
-        for (Formula f : formulas) {
-            literals.addAll(f.literals());
-        }
-        return literals;
+    public static SortedSet<Literal> literals(final Collection<? extends Formula> formulas) {
+        return formulas.stream().map(Formula::literals).flatMap(Collection::stream).collect(Collectors.toCollection(TreeSet::new));
     }
 }
