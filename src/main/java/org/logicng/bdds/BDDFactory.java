@@ -88,10 +88,11 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * The factory for the jBuddy implementation.
- * @version 1.4.0
+ * @version 2.0.0
  * @since 1.4.0
  */
 public final class BDDFactory {
@@ -271,11 +272,11 @@ public final class BDDFactory {
             temp = new TreeSet<>(this.var2idx.values());
         } else {
             temp = new TreeSet<>();
-            for (final Map.Entry<Variable, Integer> e : this.var2idx.entrySet()) {
-                if (variables.contains(e.getKey())) {
-                    temp.add(e.getValue());
+            this.var2idx.forEach((k, v) -> {
+                if (variables.contains(k)) {
+                    temp.add(v);
                 }
-            }
+            });
         }
         final int[] relevantIndices = new int[temp.size()];
         int count = 0;
@@ -350,10 +351,7 @@ public final class BDDFactory {
      * @return the DNF for the formula represented by the BDD
      */
     public Formula dnf(final BDD bdd) {
-        final List<Formula> ops = new LinkedList<>();
-        for (final Assignment ass : this.enumerateAllModels(bdd)) {
-            ops.add(ass.formula(this.f));
-        }
+        final List<Formula> ops = this.enumerateAllModels(bdd).stream().map(a -> a.formula(this.f)).collect(Collectors.toList());
         return ops.isEmpty() ? this.f.falsum() : this.f.or(ops);
     }
 
@@ -401,7 +399,7 @@ public final class BDDFactory {
         final int supportBDD = this.kernel.support(bdd.index());
         final Assignment assignment = createAssignment(supportBDD);
         assert assignment == null || assignment.negativeLiterals().isEmpty();
-        return assignment == null ? new TreeSet<Variable>() : new TreeSet<>(assignment.positiveLiterals());
+        return assignment == null ? new TreeSet<>() : new TreeSet<>(assignment.positiveLiterals());
     }
 
     /**
@@ -480,11 +478,7 @@ public final class BDDFactory {
      * @return the internal nodes of the BDD
      */
     public List<InternalBDDNode> getInternalNodes(final int bdd) {
-        final List<InternalBDDNode> result = new ArrayList<>();
-        for (final int[] node : this.kernel.allNodes(bdd)) {
-            result.add(new InternalBDDNode(node[0], this.idx2var.get(node[1]).name(), node[2], node[3]));
-        }
-        return result;
+        return this.kernel.allNodes(bdd).stream().map(n -> new InternalBDDNode(n[0], this.idx2var.get(n[1]).name(), n[2], n[3])).collect(Collectors.toList());
     }
 
     private BDDNode getInnerNode(final int index, final BDDConstant falseNode, final BDDConstant trueNode,

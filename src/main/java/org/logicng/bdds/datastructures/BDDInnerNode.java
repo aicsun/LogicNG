@@ -37,7 +37,7 @@ import java.util.Set;
 
 /**
  * A node in a BDD.
- * @version 1.4.0
+ * @version 2.0.0
  * @since 1.4.0
  */
 public final class BDDInnerNode implements BDDNode {
@@ -80,7 +80,7 @@ public final class BDDInnerNode implements BDDNode {
 
     @Override
     public Set<BDDNode> nodes() {
-        final Set<BDDNode> res = new HashSet<BDDNode>(Collections.singleton(this));
+        final Set<BDDNode> res = new HashSet<>(Collections.singleton(this));
         res.addAll(this.low.nodes());
         res.addAll(this.high.nodes());
         return res;

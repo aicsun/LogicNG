@@ -37,28 +37,22 @@ import org.logicng.predicates.CNFPredicate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Simple implementation of the FORCE BDD variable ordering due to Aloul, Markov, and Sakallah.  This ordering only
  * works for CNF formulas.  A formula has to be converted to CNF before this ordering is called.
- * @version 1.4.0
+ * @version 2.0.0
  * @since 1.4.0
  */
 public class ForceOrdering implements VariableOrderingProvider {
 
-    private static final Comparator<? super Map.Entry<HypergraphNode<Variable>, Double>> COMPARATOR =
-            new Comparator<Map.Entry<HypergraphNode<Variable>, Double>>() {
-                @Override
-                public int compare(final Map.Entry<HypergraphNode<Variable>, Double> o1, final Map.Entry<HypergraphNode<Variable>, Double> o2) {
-                    return o1.getValue().compareTo(o2.getValue());
-                }
-            };
+    private static final Comparator<? super Map.Entry<HypergraphNode<Variable>, Double>> COMPARATOR = Comparator.comparing(Map.Entry::getValue);
 
     private final DFSOrdering dfsOrdering = new DFSOrdering();
 
@@ -68,10 +62,7 @@ public class ForceOrdering implements VariableOrderingProvider {
             throw new IllegalArgumentException("FORCE variable ordering can only be applied to CNF formulas.");
         }
         final Hypergraph<Variable> hypergraph = HypergraphGenerator.fromCNF(formula);
-        final Map<Variable, HypergraphNode<Variable>> nodes = new HashMap<>();
-        for (final HypergraphNode<Variable> node : hypergraph.nodes()) {
-            nodes.put(node.content(), node);
-        }
+        final Map<Variable, HypergraphNode<Variable>> nodes = hypergraph.nodes().stream().collect(Collectors.toMap(HypergraphNode::content, Function.identity()));
         return force(formula, hypergraph, nodes);
     }
 
@@ -125,7 +116,7 @@ public class ForceOrdering implements VariableOrderingProvider {
     private LinkedHashMap<HypergraphNode<Variable>, Integer> orderingFromTentativeNewLocations(final LinkedHashMap<HypergraphNode<Variable>, Double> newLocations) {
         final LinkedHashMap<HypergraphNode<Variable>, Integer> ordering = new LinkedHashMap<>();
         final List<Map.Entry<HypergraphNode<Variable>, Double>> list = new ArrayList<>(newLocations.entrySet());
-        Collections.sort(list, COMPARATOR);
+        list.sort(COMPARATOR);
         int count = 0;
         for (final Map.Entry<HypergraphNode<Variable>, Double> entry : list) {
             ordering.put(entry.getKey(), count++);
@@ -142,5 +133,4 @@ public class ForceOrdering implements VariableOrderingProvider {
     private boolean shouldProceed(final Map<HypergraphNode<Variable>, Integer> lastOrdering, final Map<HypergraphNode<Variable>, Integer> currentOrdering) {
         return !lastOrdering.equals(currentOrdering);
     }
-
 }
