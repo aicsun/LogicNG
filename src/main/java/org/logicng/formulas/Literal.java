@@ -189,16 +189,6 @@ public class Literal extends Formula implements Comparable<Literal> {
         return this.var;
     }
 
-    /**
-     * Returns a negative version of this literal.
-     * @return a negative version of this literal
-     * @deprecated Misleading due to closely named method {@link #negate()}. Error-prone results likely if this method is called but {@link #negate()} was meant to be called.
-     */
-    @Deprecated
-    public Literal negative() {
-        return this.phase ? this.negate() : this;
-    }
-
     @Override
     public int hashCode() {
         final int result = this.hashCode;

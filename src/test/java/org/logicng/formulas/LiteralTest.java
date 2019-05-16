@@ -181,8 +181,6 @@ public class LiteralTest {
     @Test
     public void testPosNeg() {
         Assert.assertEquals(F.A, F.A.variable());
-        Assert.assertEquals(F.NA, F.A.negative());
         Assert.assertEquals(F.A, F.NA.variable());
-        Assert.assertEquals(F.NA, F.NA.negative());
     }
 }
