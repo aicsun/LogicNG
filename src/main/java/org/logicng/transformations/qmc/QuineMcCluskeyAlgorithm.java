@@ -163,11 +163,7 @@ public class QuineMcCluskeyAlgorithm {
                         if (combined != null) {
                             thisTerm.setUsed(true);
                             otherTerm.setUsed(true);
-                            LinkedHashSet<Term> foundTerms = newTermsInClasses.get(combined.termClass());
-                            if (foundTerms == null) {
-                                foundTerms = new LinkedHashSet<>();
-                                newTermsInClasses.put(combined.termClass(), foundTerms);
-                            }
+                            LinkedHashSet<Term> foundTerms = newTermsInClasses.computeIfAbsent(combined.termClass(), k -> new LinkedHashSet<>());
                             foundTerms.add(combined);
                         }
                     }
@@ -202,11 +198,7 @@ public class QuineMcCluskeyAlgorithm {
     static SortedMap<Integer, LinkedHashSet<Term>> generateInitialTermClasses(final List<Term> terms) {
         final SortedMap<Integer, LinkedHashSet<Term>> termsInClasses = new TreeMap<>();
         for (final Term term : terms) {
-            LinkedHashSet<Term> presentTerms = termsInClasses.get(term.termClass());
-            if (presentTerms == null) {
-                presentTerms = new LinkedHashSet<>();
-                termsInClasses.put(term.termClass(), presentTerms);
-            }
+            LinkedHashSet<Term> presentTerms = termsInClasses.computeIfAbsent(term.termClass(), k -> new LinkedHashSet<>());
             presentTerms.add(term);
         }
         return termsInClasses;
@@ -274,7 +266,7 @@ public class QuineMcCluskeyAlgorithm {
         for (final Formula formula : table.columnHeaders()) {
             final Variable selector = f.variable(prefix + count++);
             formula2VarMapping.put(formula, selector);
-            minterm2Variants.put(selector, new ArrayList<Variable>());
+            minterm2Variants.put(selector, new ArrayList<>());
         }
         count = 0;
         prefix = "@TERM_SEL_";

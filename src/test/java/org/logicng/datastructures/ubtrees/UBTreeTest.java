@@ -18,7 +18,7 @@ public class UBTreeTest {
     @Test
     public void testEmptySet() {
         UBTree<String> tree = new UBTree<>();
-        tree.addSet(new TreeSet<String>());
+        tree.addSet(new TreeSet<>());
         assertThat(tree.rootNodes()).isEmpty();
     }
 

@@ -85,8 +85,8 @@ public class SortedStringRepresentationTest {
         assertThat(F.f.string(F.PBC2, this.sr)).isEqualTo("3*x + -4*b + 2*a > 2");
         assertThat(F.f.string(F.f.and(F.NB, F.PBC1), this.sr)).isEqualTo("(3*x + -4*b + 2*a = 2) & ~b");
         assertThat(F.f.string(F.f.pbc(CType.EQ, 42, new ArrayList<Literal>(Arrays.asList(F.A, F.B)), new ArrayList<>(Arrays.asList(1, 1))), this.sr)).isEqualTo("b + a = 42");
-        assertThat(F.f.string(F.f.pbc(CType.LT, 42, new ArrayList<Literal>(), new ArrayList<Integer>()), this.sr)).isEqualTo("$true");
-        assertThat(F.f.string(F.f.pbc(CType.EQ, 42, new ArrayList<Literal>(), new ArrayList<Integer>()), this.sr)).isEqualTo("$false");
+        assertThat(F.f.string(F.f.pbc(CType.LT, 42, new ArrayList<>(), new ArrayList<>()), this.sr)).isEqualTo("$true");
+        assertThat(F.f.string(F.f.pbc(CType.EQ, 42, new ArrayList<>(), new ArrayList<>()), this.sr)).isEqualTo("$false");
 
         // some variables not in varOrder
         this.varOrder.remove(F.X);
@@ -94,7 +94,7 @@ public class SortedStringRepresentationTest {
         assertThat(F.f.string(F.PBC2, this.sr)).isEqualTo("-4*b + 2*a + 3*x > 2");
 
         // empty varOrder
-        assertThat(F.f.string(F.EQ3, new SortedStringRepresentation(new ArrayList<Variable>()))).isEqualTo("a & b <=> x | y");
+        assertThat(F.f.string(F.EQ3, new SortedStringRepresentation(new ArrayList<>()))).isEqualTo("a & b <=> x | y");
     }
 
     @Test

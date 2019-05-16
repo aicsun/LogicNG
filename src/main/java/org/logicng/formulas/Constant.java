@@ -44,8 +44,8 @@ import java.util.TreeSet;
  */
 public abstract class Constant extends Formula {
 
-    private static final SortedSet<Variable> EMPTY_VARIABLE_SET = Collections.unmodifiableSortedSet(new TreeSet<Variable>());
-    private static final SortedSet<Literal> EMPTY_LITERAL_SET = Collections.unmodifiableSortedSet(new TreeSet<Literal>());
+    private static final SortedSet<Variable> EMPTY_VARIABLE_SET = Collections.unmodifiableSortedSet(new TreeSet<>());
+    private static final SortedSet<Literal> EMPTY_LITERAL_SET = Collections.unmodifiableSortedSet(new TreeSet<>());
 
     private static final Iterator<Formula> ITERATOR = new Iterator<Formula>() {
         @Override

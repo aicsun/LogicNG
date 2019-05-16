@@ -85,7 +85,7 @@ public class ImplicationTest {
     @Test
     public void testLiterals() {
         Assert.assertEquals(4, F.IMP3.literals().size());
-        SortedSet<Literal> lits = new TreeSet<Literal>(Arrays.asList(F.A, F.B, F.X, F.Y));
+        SortedSet<Literal> lits = new TreeSet<>(Arrays.asList(F.A, F.B, F.X, F.Y));
         Assert.assertEquals(lits, F.IMP3.literals());
 
         Formula imp = F.f.implication(F.AND1, F.AND2);
@@ -95,7 +95,7 @@ public class ImplicationTest {
 
         imp = F.f.implication(F.AND1, F.A);
         Assert.assertEquals(2, imp.literals().size());
-        lits = new TreeSet<Literal>(Arrays.asList(F.A, F.B));
+        lits = new TreeSet<>(Arrays.asList(F.A, F.B));
         Assert.assertEquals(lits, imp.literals());
     }
 

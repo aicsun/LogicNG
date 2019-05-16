@@ -72,12 +72,7 @@ public final class LiteralProfileFunction implements FormulaFunction<Map<Literal
     private static void nonCachingRecursion(final Formula formula, final Map<Literal, Integer> map) {
         if (formula.type() == FType.LITERAL) {
             final Literal lit = (Literal) formula;
-            final Integer currentCount = map.get(lit);
-            if (currentCount == null) {
-                map.put(lit, 1);
-            } else {
-                map.put(lit, currentCount + 1);
-            }
+            map.merge(lit, 1, Integer::sum);
         } else if (formula.type() == FType.PBC) {
             for (final Literal l : formula.literals()) {
                 nonCachingRecursion(l, map);
@@ -112,12 +107,7 @@ public final class LiteralProfileFunction implements FormulaFunction<Map<Literal
             for (final Formula op : formula) {
                 final Map<Literal, Integer> temp = cachingLiteralProfile(op);
                 for (Map.Entry<Literal, Integer> entry : temp.entrySet()) {
-                    final Integer currentCount = result.get(entry.getKey());
-                    if (currentCount == null) {
-                        result.put(entry.getKey(), entry.getValue());
-                    } else {
-                        result.put(entry.getKey(), currentCount + entry.getValue());
-                    }
+                    result.merge(entry.getKey(), entry.getValue(), Integer::sum);
                 }
             }
         }

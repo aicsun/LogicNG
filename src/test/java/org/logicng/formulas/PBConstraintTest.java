@@ -537,66 +537,66 @@ public class PBConstraintTest {
 
     @Test
     public void testTrivialTrue() {
-        Assert.assertTrue(f.pbc(CType.EQ, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertFalse(f.pbc(CType.EQ, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertFalse(f.pbc(CType.EQ, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
+        Assert.assertTrue(f.pbc(CType.EQ, 0, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertFalse(f.pbc(CType.EQ, 1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertFalse(f.pbc(CType.EQ, -1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
 
-        Assert.assertFalse(f.pbc(CType.GT, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertFalse(f.pbc(CType.GT, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertTrue(f.pbc(CType.GT, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
+        Assert.assertFalse(f.pbc(CType.GT, 0, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertFalse(f.pbc(CType.GT, 1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertTrue(f.pbc(CType.GT, -1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
 
-        Assert.assertTrue(f.pbc(CType.GE, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertFalse(f.pbc(CType.GE, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertTrue(f.pbc(CType.GE, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
+        Assert.assertTrue(f.pbc(CType.GE, 0, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertFalse(f.pbc(CType.GE, 1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertTrue(f.pbc(CType.GE, -1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
 
-        Assert.assertFalse(f.pbc(CType.LT, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertTrue(f.pbc(CType.LT, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertFalse(f.pbc(CType.LT, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
+        Assert.assertFalse(f.pbc(CType.LT, 0, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertTrue(f.pbc(CType.LT, 1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertFalse(f.pbc(CType.LT, -1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
 
-        Assert.assertTrue(f.pbc(CType.LE, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertTrue(f.pbc(CType.LE, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
-        Assert.assertFalse(f.pbc(CType.LE, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialTrue());
+        Assert.assertTrue(f.pbc(CType.LE, 0, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertTrue(f.pbc(CType.LE, 1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
+        Assert.assertFalse(f.pbc(CType.LE, -1, new ArrayList<>(), new ArrayList<>()).isTrivialTrue());
     }
 
     @Test
     public void testTrivialFalse() {
-        Assert.assertFalse(f.pbc(CType.EQ, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertTrue(f.pbc(CType.EQ, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertTrue(f.pbc(CType.EQ, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
+        Assert.assertFalse(f.pbc(CType.EQ, 0, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertTrue(f.pbc(CType.EQ, 1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertTrue(f.pbc(CType.EQ, -1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
 
-        Assert.assertTrue(f.pbc(CType.GT, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertTrue(f.pbc(CType.GT, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertFalse(f.pbc(CType.GT, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
+        Assert.assertTrue(f.pbc(CType.GT, 0, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertTrue(f.pbc(CType.GT, 1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertFalse(f.pbc(CType.GT, -1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
 
-        Assert.assertFalse(f.pbc(CType.GE, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertTrue(f.pbc(CType.GE, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertFalse(f.pbc(CType.GE, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
+        Assert.assertFalse(f.pbc(CType.GE, 0, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertTrue(f.pbc(CType.GE, 1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertFalse(f.pbc(CType.GE, -1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
 
-        Assert.assertTrue(f.pbc(CType.LT, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertFalse(f.pbc(CType.LT, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertTrue(f.pbc(CType.LT, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
+        Assert.assertTrue(f.pbc(CType.LT, 0, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertFalse(f.pbc(CType.LT, 1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertTrue(f.pbc(CType.LT, -1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
 
-        Assert.assertFalse(f.pbc(CType.LE, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertFalse(f.pbc(CType.LE, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
-        Assert.assertTrue(f.pbc(CType.LE, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).isTrivialFalse());
+        Assert.assertFalse(f.pbc(CType.LE, 0, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertFalse(f.pbc(CType.LE, 1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
+        Assert.assertTrue(f.pbc(CType.LE, -1, new ArrayList<>(), new ArrayList<>()).isTrivialFalse());
     }
 
     @Test
     public void testSimplifiedToString() {
-        Assert.assertEquals(f.pbc(CType.EQ, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$true");
-        Assert.assertEquals(f.pbc(CType.EQ, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$false");
-        Assert.assertEquals(f.pbc(CType.EQ, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$false");
-        Assert.assertEquals(f.pbc(CType.GT, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$false");
-        Assert.assertEquals(f.pbc(CType.GT, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$false");
-        Assert.assertEquals(f.pbc(CType.GT, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$true");
-        Assert.assertEquals(f.pbc(CType.GE, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$true");
-        Assert.assertEquals(f.pbc(CType.GE, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$false");
-        Assert.assertEquals(f.pbc(CType.GE, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$true");
-        Assert.assertEquals(f.pbc(CType.LT, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$false");
-        Assert.assertEquals(f.pbc(CType.LT, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$true");
-        Assert.assertEquals(f.pbc(CType.LT, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$false");
-        Assert.assertEquals(f.pbc(CType.LE, 0, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$true");
-        Assert.assertEquals(f.pbc(CType.LE, 1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$true");
-        Assert.assertEquals(f.pbc(CType.LE, -1, new ArrayList<Literal>(), new ArrayList<Integer>()).toString(), "$false");
+        Assert.assertEquals(f.pbc(CType.EQ, 0, new ArrayList<>(), new ArrayList<>()).toString(), "$true");
+        Assert.assertEquals(f.pbc(CType.EQ, 1, new ArrayList<>(), new ArrayList<>()).toString(), "$false");
+        Assert.assertEquals(f.pbc(CType.EQ, -1, new ArrayList<>(), new ArrayList<>()).toString(), "$false");
+        Assert.assertEquals(f.pbc(CType.GT, 0, new ArrayList<>(), new ArrayList<>()).toString(), "$false");
+        Assert.assertEquals(f.pbc(CType.GT, 1, new ArrayList<>(), new ArrayList<>()).toString(), "$false");
+        Assert.assertEquals(f.pbc(CType.GT, -1, new ArrayList<>(), new ArrayList<>()).toString(), "$true");
+        Assert.assertEquals(f.pbc(CType.GE, 0, new ArrayList<>(), new ArrayList<>()).toString(), "$true");
+        Assert.assertEquals(f.pbc(CType.GE, 1, new ArrayList<>(), new ArrayList<>()).toString(), "$false");
+        Assert.assertEquals(f.pbc(CType.GE, -1, new ArrayList<>(), new ArrayList<>()).toString(), "$true");
+        Assert.assertEquals(f.pbc(CType.LT, 0, new ArrayList<>(), new ArrayList<>()).toString(), "$false");
+        Assert.assertEquals(f.pbc(CType.LT, 1, new ArrayList<>(), new ArrayList<>()).toString(), "$true");
+        Assert.assertEquals(f.pbc(CType.LT, -1, new ArrayList<>(), new ArrayList<>()).toString(), "$false");
+        Assert.assertEquals(f.pbc(CType.LE, 0, new ArrayList<>(), new ArrayList<>()).toString(), "$true");
+        Assert.assertEquals(f.pbc(CType.LE, 1, new ArrayList<>(), new ArrayList<>()).toString(), "$true");
+        Assert.assertEquals(f.pbc(CType.LE, -1, new ArrayList<>(), new ArrayList<>()).toString(), "$false");
     }
 }

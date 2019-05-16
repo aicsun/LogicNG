@@ -47,7 +47,6 @@ import org.logicng.formulas.FormulaFactory;
 import org.logicng.formulas.Literal;
 import org.logicng.formulas.PBConstraint;
 import org.logicng.formulas.Variable;
-import org.logicng.handlers.ModelEnumerationHandler;
 import org.logicng.handlers.NumberOfModelsHandler;
 import org.logicng.handlers.TimeoutSATHandler;
 import org.logicng.io.parsers.ParserException;
@@ -274,12 +273,7 @@ public class SATTest {
         for (final SATSolver s : this.solvers) {
             s.add(F.IMP3);
             try {
-                final List<Assignment> models = s.enumerateAllModels(new ModelEnumerationHandler() {
-                    @Override
-                    public boolean foundModel(final Assignment assignment) {
-                        return !assignment.negativeLiterals().isEmpty();
-                    }
-                });
+                final List<Assignment> models = s.enumerateAllModels(assignment -> !assignment.negativeLiterals().isEmpty());
                 Assert.assertFalse(models.isEmpty());
                 Assert.assertTrue(models.get(models.size() - 1).negativeLiterals().isEmpty());
                 models.remove(models.size() - 1);
@@ -289,7 +283,6 @@ public class SATTest {
             } catch (final Exception e) {
                 Assert.assertTrue(e instanceof UnsupportedOperationException);
             }
-
             s.reset();
         }
     }
@@ -750,9 +743,9 @@ public class SATTest {
     public void testUPZeroLiterals() throws ParserException {
         // Note: The complete unit propagated set of literals on level 0 depends on each solver's added learned clauses during the solving process
         final Map<Formula, SortedSet<Literal>> expectedSubsets = new HashMap<>();
-        expectedSubsets.put(this.f.verum(), new TreeSet<Literal>());
+        expectedSubsets.put(this.f.verum(), new TreeSet<>());
         expectedSubsets.put(this.parser.parse("a"), new TreeSet<>(Collections.singletonList(this.f.literal("a", true))));
-        expectedSubsets.put(this.parser.parse("a | b"), new TreeSet<Literal>());
+        expectedSubsets.put(this.parser.parse("a | b"), new TreeSet<>());
         expectedSubsets.put(this.parser.parse("a & b"), new TreeSet<>(Arrays.asList(this.f.literal("a", true), this.f.literal("b", true))));
         expectedSubsets.put(this.parser.parse("a & ~b"), new TreeSet<>(Arrays.asList(this.f.literal("a", true), this.f.literal("b", false))));
         expectedSubsets.put(this.parser.parse("(a | c) & ~b"), new TreeSet<>(Collections.singletonList(this.f.literal("b", false))));

@@ -384,12 +384,7 @@ public abstract class MaxSAT {
         for (int i = 0; i < nSoft(); i++) {
             final int weight = this.softClauses.get(i).weight();
             partitionWeights.add(weight);
-            final Integer foundNB = nbPartitionWeights.get(weight);
-            if (foundNB == null) {
-                nbPartitionWeights.put(weight, 1);
-            } else {
-                nbPartitionWeights.put(weight, foundNB + 1);
-            }
+            nbPartitionWeights.merge(weight, 1, Integer::sum);
         }
         for (final int i : partitionWeights) {
             this.orderWeights.push(i);

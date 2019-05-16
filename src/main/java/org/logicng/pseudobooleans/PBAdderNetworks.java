@@ -97,7 +97,7 @@ final class PBAdderNetworks implements PBEncoding {
         final LNGVector<LinkedList<Literal>> buckets = new LNGVector<>();
         int nb = ldInt(rhs);
         for (int iBit = 0; iBit < nb; ++iBit) {
-            buckets.push(new LinkedList<Literal>());
+            buckets.push(new LinkedList<>());
             result.push(null);
             for (int iVar = 0; iVar < lits.size(); iVar++) {
                 if (((1 << iBit) & coeffs.get(iVar)) != 0) {
@@ -121,7 +121,7 @@ final class PBAdderNetworks implements PBEncoding {
                 continue;
             }
             if (i == buckets.size() - 1 && buckets.get(i).size() >= 2) {
-                buckets.push(new LinkedList<Literal>());
+                buckets.push(new LinkedList<>());
                 result.push(null);
             }
             while (buckets.get(i).size() >= 3) {

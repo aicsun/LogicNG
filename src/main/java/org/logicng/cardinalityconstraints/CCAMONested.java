@@ -78,7 +78,7 @@ final class CCAMONested implements CCAtMostOne {
     public void build(final EncodingResult result, final Variable... vars) {
         result.reset();
         this.result = result;
-        this.encodeIntern(new LNGVector<Literal>(vars));
+        this.encodeIntern(new LNGVector<>(vars));
     }
 
     /**

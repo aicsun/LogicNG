@@ -58,12 +58,7 @@ public class BronKerbosch<T extends Comparable<T>> {
      */
     public BronKerbosch(Graph<T> g) {
         this.g = g;
-        this.nodeComparator = new Comparator<Node<T>>() {
-            @Override
-            public int compare(Node<T> o1, Node<T> o2) {
-                return o1.content().compareTo(o2.content());
-            }
-        };
+        this.nodeComparator = Comparator.comparing(Node::content);
         this.cliques = new HashSet<>();
     }
 

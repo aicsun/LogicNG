@@ -157,7 +157,7 @@ public final class SortedStringRepresentation extends DefaultStringRepresentatio
             operands.add(op);
         }
         final int size = operator.numberOfOperands();
-        Collections.sort(operands, this.comparator);
+        operands.sort(this.comparator);
         final StringBuilder sb = new StringBuilder();
         int count = 0;
         Formula last = null;

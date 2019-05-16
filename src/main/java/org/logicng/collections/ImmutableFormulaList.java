@@ -238,12 +238,7 @@ public final class ImmutableFormulaList implements Iterable<Formula> {
         final SortedMap<Variable, Integer> profile = new TreeMap<>();
         for (final Formula f : this.formulas) {
             for (final Map.Entry<Variable, Integer> entry : f.apply(variableProfileFunction).entrySet()) {
-                final Integer currentCount = profile.get(entry.getKey());
-                if (currentCount == null) {
-                    profile.put(entry.getKey(), entry.getValue());
-                } else {
-                    profile.put(entry.getKey(), entry.getValue() + currentCount);
-                }
+                profile.merge(entry.getKey(), entry.getValue(), Integer::sum);
             }
         }
         return profile;
@@ -258,12 +253,7 @@ public final class ImmutableFormulaList implements Iterable<Formula> {
         final SortedMap<Literal, Integer> profile = new TreeMap<>();
         for (final Formula f : this.formulas) {
             for (final Map.Entry<Literal, Integer> entry : f.apply(literalProfileFunction).entrySet()) {
-                final Integer currentCount = profile.get(entry.getKey());
-                if (currentCount == null) {
-                    profile.put(entry.getKey(), entry.getValue());
-                } else {
-                    profile.put(entry.getKey(), entry.getValue() + currentCount);
-                }
+                profile.merge(entry.getKey(), entry.getValue(), Integer::sum);
             }
         }
         return profile;

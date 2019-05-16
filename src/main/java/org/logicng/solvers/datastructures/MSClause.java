@@ -58,37 +58,30 @@ public class MSClause {
     /**
      * A comparator for clauses based on LBD and activity (used for the Glucose solver).
      */
-    public static final Comparator<MSClause> glucoseComparator = new Comparator<MSClause>() {
-        @Override
-        public int compare(final MSClause x, final MSClause y) {
-            if (x.size() > 2 && y.size() == 2) {
-                return -1;
-            }
-            if (y.size() > 2 && x.size() == 2) {
-                return 1;
-            }
-            if (x.size() == 2 && y.size() == 2) {
-                return 1;
-            }
-            if (x.lbd() > y.lbd()) {
-                return -1;
-            }
-            if (x.lbd() < y.lbd()) {
-                return 1;
-            }
-            return x.activity() < y.activity() ? -1 : 1;
+    public static final Comparator<MSClause> glucoseComparator = (x, y) -> {
+        if (x.size() > 2 && y.size() == 2) {
+            return -1;
         }
+        if (y.size() > 2 && x.size() == 2) {
+            return 1;
+        }
+        if (x.size() == 2 && y.size() == 2) {
+            return 1;
+        }
+        if (x.lbd() > y.lbd()) {
+            return -1;
+        }
+        if (x.lbd() < y.lbd()) {
+            return 1;
+        }
+        return x.activity() < y.activity() ? -1 : 1;
     };
 
     /**
      * A comparator for clauses based on activity (used for the MiniSAT solver).
      */
-    public static final Comparator<MSClause> minisatComparator = new Comparator<MSClause>() {
-        @Override
-        public int compare(final MSClause x, final MSClause y) {
-            return x.size() > 2 && (y.size() == 2 || x.activity() < y.activity()) ? -1 : 1;
-        }
-    };
+    public static final Comparator<MSClause> minisatComparator =
+            (x, y) -> x.size() > 2 && (y.size() == 2 || x.activity() < y.activity()) ? -1 : 1;
 
     private final LNGIntVector data;
     private final boolean learnt;

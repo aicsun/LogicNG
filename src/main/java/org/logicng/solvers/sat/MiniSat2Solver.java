@@ -108,8 +108,8 @@ public class MiniSat2Solver extends MiniSatStyleSolver {
         int v = vars.size();
         MSVariable newVar = new MSVariable(sign);
         vars.push(newVar);
-        watches.push(new LNGVector<MSWatcher>());
-        watches.push(new LNGVector<MSWatcher>());
+        watches.push(new LNGVector<>());
+        watches.push(new LNGVector<>());
         seen.push(false);
         newVar.setDecision(dvar);
         insertVarOrder(v);

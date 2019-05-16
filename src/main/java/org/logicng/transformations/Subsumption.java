@@ -27,11 +27,7 @@ public abstract class Subsumption {
     protected static UBTree<Literal> generateSubsumedUBTree(final Formula formula) {
         final SortedMap<Integer, List<SortedSet<Literal>>> mapping = new TreeMap<>();
         for (final Formula term : formula) {
-            List<SortedSet<Literal>> terms = mapping.get(term.literals().size());
-            if (terms == null) {
-                terms = new LinkedList<>();
-                mapping.put(term.literals().size(), terms);
-            }
+            List<SortedSet<Literal>> terms = mapping.computeIfAbsent(term.literals().size(), k -> new LinkedList<>());
             terms.add(term.literals());
         }
         final UBTree<Literal> ubTree = new UBTree<>();

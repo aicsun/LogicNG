@@ -167,7 +167,7 @@ final class PBBinaryMerge implements PBEncoding {
         final LNGVector<LNGVector<Literal>> buckets = new LNGVector<>();
         int bit = 1;
         for (int i = 0; i <= p; i++) {
-            buckets.push(new LNGVector<Literal>());
+            buckets.push(new LNGVector<>());
             if ((T & bit) != 0) {
                 buckets.get(i).push(true_lit);
             }
@@ -185,8 +185,8 @@ final class PBBinaryMerge implements PBEncoding {
         LNGVector<LNGVector<Literal>> bucket_card = new LNGVector<>(p + 1);
         LNGVector<LNGVector<Literal>> bucket_merge = new LNGVector<>(p + 1);
         for (int i = 0; i < p + 1; i++) {
-            bucket_card.push(new LNGVector<Literal>());
-            bucket_merge.push(new LNGVector<Literal>());
+            bucket_card.push(new LNGVector<>());
+            bucket_merge.push(new LNGVector<>());
         }
         assert bucket_card.size() == buckets.size();
         final LNGVector<Literal> carries = new LNGVector<>();

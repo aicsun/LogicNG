@@ -35,13 +35,13 @@ public class TermTest {
         final Tristate[] bits7 = new Tristate[]{TRUE, FALSE, TRUE};
 
         final FormulaFactory f = new FormulaFactory();
-        final List<Formula> formulas1 = Collections.<Formula>singletonList(f.variable("f1"));
-        final List<Formula> formulas2 = Collections.<Formula>singletonList(f.variable("f2"));
-        final List<Formula> formulas3 = Collections.<Formula>singletonList(f.variable("f3"));
-        final List<Formula> formulas4 = Collections.<Formula>singletonList(f.variable("f4"));
-        final List<Formula> formulas5 = Collections.<Formula>singletonList(f.variable("f5"));
-        final List<Formula> formulas6 = Collections.<Formula>singletonList(f.variable("f6"));
-        final List<Formula> formulas7 = Collections.<Formula>singletonList(f.variable("f7"));
+        final List<Formula> formulas1 = Collections.singletonList(f.variable("f1"));
+        final List<Formula> formulas2 = Collections.singletonList(f.variable("f2"));
+        final List<Formula> formulas3 = Collections.singletonList(f.variable("f3"));
+        final List<Formula> formulas4 = Collections.singletonList(f.variable("f4"));
+        final List<Formula> formulas5 = Collections.singletonList(f.variable("f5"));
+        final List<Formula> formulas6 = Collections.singletonList(f.variable("f6"));
+        final List<Formula> formulas7 = Collections.singletonList(f.variable("f7"));
 
         final Term term1 = new Term(bits1, formulas1);
         final Term term2 = new Term(bits2, formulas2);
@@ -51,13 +51,13 @@ public class TermTest {
         final Term term6 = new Term(bits6, formulas6);
         final Term term7 = new Term(bits7, formulas7);
 
-        assertThat(term1.combine(term2)).isEqualTo(new Term(new Tristate[]{TRUE, UNDEF, TRUE, TRUE}, Arrays.<Formula>asList(f.variable("f1"), f.variable("f2"))));
-        assertThat(term1.combine(term3)).isEqualTo(new Term(new Tristate[]{TRUE, TRUE, UNDEF, TRUE}, Arrays.<Formula>asList(f.variable("f1"), f.variable("f3"))));
+        assertThat(term1.combine(term2)).isEqualTo(new Term(new Tristate[]{TRUE, UNDEF, TRUE, TRUE}, Arrays.asList(f.variable("f1"), f.variable("f2"))));
+        assertThat(term1.combine(term3)).isEqualTo(new Term(new Tristate[]{TRUE, TRUE, UNDEF, TRUE}, Arrays.asList(f.variable("f1"), f.variable("f3"))));
         assertThat(term2.combine(term3)).isNull();
         assertThat(term1.combine(term4)).isNull();
-        assertThat(term2.combine(term4)).isEqualTo(new Term(new Tristate[]{UNDEF, FALSE, TRUE, TRUE}, Arrays.<Formula>asList(f.variable("f2"), f.variable("f4"))));
+        assertThat(term2.combine(term4)).isEqualTo(new Term(new Tristate[]{UNDEF, FALSE, TRUE, TRUE}, Arrays.asList(f.variable("f2"), f.variable("f4"))));
         assertThat(term3.combine(term4)).isNull();
-        assertThat(term5.combine(term6)).isEqualTo(new Term(new Tristate[]{TRUE, FALSE, UNDEF, UNDEF}, Arrays.<Formula>asList(f.variable("f5"), f.variable("f6"))));
+        assertThat(term5.combine(term6)).isEqualTo(new Term(new Tristate[]{TRUE, FALSE, UNDEF, UNDEF}, Arrays.asList(f.variable("f5"), f.variable("f6"))));
         assertThat(term1.combine(term7)).isNull();
     }
 
@@ -71,12 +71,12 @@ public class TermTest {
         final Tristate[] bits4 = new Tristate[]{FALSE, FALSE, TRUE, TRUE};
         final Tristate[] bits5 = new Tristate[]{TRUE, FALSE, FALSE, UNDEF};
         final Tristate[] bits6 = new Tristate[]{TRUE, UNDEF, TRUE, UNDEF};
-        final List<Formula> formulas1 = Collections.<Formula>singletonList(f.variable("f1"));
-        final List<Formula> formulas2 = Collections.<Formula>singletonList(f.variable("f2"));
-        final List<Formula> formulas3 = Collections.<Formula>singletonList(f.variable("f3"));
-        final List<Formula> formulas4 = Collections.<Formula>singletonList(f.variable("f4"));
-        final List<Formula> formulas5 = Collections.<Formula>singletonList(f.variable("f5"));
-        final List<Formula> formulas6 = Collections.<Formula>singletonList(f.variable("f6"));
+        final List<Formula> formulas1 = Collections.singletonList(f.variable("f1"));
+        final List<Formula> formulas2 = Collections.singletonList(f.variable("f2"));
+        final List<Formula> formulas3 = Collections.singletonList(f.variable("f3"));
+        final List<Formula> formulas4 = Collections.singletonList(f.variable("f4"));
+        final List<Formula> formulas5 = Collections.singletonList(f.variable("f5"));
+        final List<Formula> formulas6 = Collections.singletonList(f.variable("f6"));
 
         final Term term1 = new Term(bits1, formulas1);
         final Term term2 = new Term(bits2, formulas2);
@@ -100,8 +100,8 @@ public class TermTest {
         final FormulaFactory f = new FormulaFactory();
         final Tristate[] bits1 = new Tristate[]{TRUE, TRUE, TRUE, TRUE};
         final Tristate[] bits2 = new Tristate[]{TRUE, FALSE, TRUE, TRUE};
-        final List<Formula> formulas1 = Collections.<Formula>singletonList(f.variable("f1"));
-        final List<Formula> formulas2 = Collections.<Formula>singletonList(f.variable("f2"));
+        final List<Formula> formulas1 = Collections.singletonList(f.variable("f1"));
+        final List<Formula> formulas2 = Collections.singletonList(f.variable("f2"));
         final Term term1 = new Term(bits1, formulas1);
         final Term term2 = new Term(bits2, formulas2);
         assertThat(term1.toString()).isEqualTo("Term{bits=[TRUE, TRUE, TRUE, TRUE], minterms=[f1], termClass=4}");

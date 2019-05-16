@@ -85,7 +85,7 @@ public class HypergraphEdgeTest {
         final PropositionalParser p = new PropositionalParser(f);
         final Hypergraph<Variable> hypergraph = HypergraphGenerator.fromCNF(Collections.singletonList(p.parse("A | B | ~C | D")));
         final HypergraphEdge<Variable> edge = hypergraph.edges().iterator().next();
-        edge.centerOfGravity(new HashMap<HypergraphNode<Variable>, Integer>());
+        edge.centerOfGravity(new HashMap<>());
     }
 
 }

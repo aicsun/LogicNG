@@ -225,7 +225,7 @@ public final class CCSorting {
         int n = x.size();
         auxVars.clear();
         for (int i = 0; i < n; i++) {
-            auxVars.push(new LNGVector<Literal>(k));
+            auxVars.push(new LNGVector<>(k));
         }
 
         for (int j = 0; j < k; j++) {

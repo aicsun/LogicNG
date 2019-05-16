@@ -93,11 +93,7 @@ public class DistributiveSimplifier implements FormulaTransformation {
         for (Formula op : operands) {
             if (op.type() == innerType) {
                 for (Formula part : op) {
-                    Set<Formula> partOperands = part2Operands.get(part);
-                    if (partOperands == null) {
-                        partOperands = new LinkedHashSet<>();
-                        part2Operands.put(part, partOperands);
-                    }
+                    Set<Formula> partOperands = part2Operands.computeIfAbsent(part, k -> new LinkedHashSet<>());
                     partOperands.add(op);
                     if (partOperands.size() > mostCommonAmount) {
                         mostCommon = part;

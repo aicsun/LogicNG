@@ -84,7 +84,7 @@ final class CCAMOBimander implements CCAtMostOne {
     public void build(final EncodingResult result, final Variable... vars) {
         result.reset();
         this.result = result;
-        this.encodeIntern(new LNGVector<Literal>(vars));
+        this.encodeIntern(new LNGVector<>(vars));
     }
 
     /**
@@ -142,7 +142,7 @@ final class CCAMOBimander implements CCAtMostOne {
         int n = vars.size();
         this.groups.clear();
         for (int i = 0; i < this.m; i++) {
-            this.groups.push(new LNGVector<Literal>());
+            this.groups.push(new LNGVector<>());
         }
 
         int g = (int) Math.ceil((double) n / this.m);

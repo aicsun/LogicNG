@@ -206,10 +206,10 @@ public final class GlucoseSyrup extends MiniSatStyleSolver {
     public int newVar(boolean sign, boolean dvar) {
         int v = nVars();
         MSVariable newVar = new MSVariable(sign);
-        watches.push(new LNGVector<MSWatcher>());
-        watches.push(new LNGVector<MSWatcher>());
-        watchesBin.push(new LNGVector<MSWatcher>());
-        watchesBin.push(new LNGVector<MSWatcher>());
+        watches.push(new LNGVector<>());
+        watches.push(new LNGVector<>());
+        watchesBin.push(new LNGVector<>());
+        watchesBin.push(new LNGVector<>());
         vars.push(newVar);
         seen.push(false);
         permDiff.push(0);

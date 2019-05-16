@@ -137,7 +137,7 @@ public class BackboneGenerationTest {
         Formula formula = f.verum();
         int[] before = solver.saveState();
         solver.add(formula);
-        assertThat(solver.compute(Collections.<Variable>emptyList(), BackboneType.POSITIVE_AND_NEGATIVE).getCompleteBackbone()).isEqualTo(
+        assertThat(solver.compute(Collections.emptyList(), BackboneType.POSITIVE_AND_NEGATIVE).getCompleteBackbone()).isEqualTo(
                 new TreeSet<>()
         );
         solver.loadState(before);

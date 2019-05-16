@@ -32,7 +32,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.logicng.formulas.CType;
 import org.logicng.formulas.F;
-import org.logicng.formulas.Literal;
 
 import java.util.ArrayList;
 
@@ -67,8 +66,8 @@ public class DefaultStringRepresentationTest {
         Assert.assertEquals("2*a + -4*b + 3*x >= 2", F.f.string(F.PBC3, this.sr));
         Assert.assertEquals("2*a + -4*b + 3*x < 2", F.f.string(F.PBC4, this.sr));
         Assert.assertEquals("2*a + -4*b + 3*x <= 2", F.f.string(F.PBC5, this.sr));
-        Assert.assertEquals("$true", F.f.string(F.f.pbc(CType.LT, 42, new ArrayList<Literal>(), new ArrayList<Integer>()), this.sr));
-        Assert.assertEquals("$false", F.f.string(F.f.pbc(CType.EQ, 42, new ArrayList<Literal>(), new ArrayList<Integer>()), this.sr));
+        Assert.assertEquals("$true", F.f.string(F.f.pbc(CType.LT, 42, new ArrayList<>(), new ArrayList<>()), this.sr));
+        Assert.assertEquals("$false", F.f.string(F.f.pbc(CType.EQ, 42, new ArrayList<>(), new ArrayList<>()), this.sr));
     }
 
     @Test
