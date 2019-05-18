@@ -57,6 +57,7 @@ public class F {
     public static final Formula OR1 = f.or(X, Y);
     public static final Formula OR2 = f.or(NX, NY);
     public static final Formula OR3 = f.or(f.and(A, B), f.and(NA, NB));
+    public static final Formula OR4 = f.or(A, B);
 
     // Conjunctions
     public static final Formula AND1 = f.and(A, B);
@@ -66,6 +67,7 @@ public class F {
     // Negations
     public static final Formula NOT1 = f.not(AND1);
     public static final Formula NOT2 = f.not(OR1);
+    public static final Formula NOT3 = f.not(OR4);
 
     // Implications
     public static final Formula IMP1 = f.implication(A, B);
