@@ -36,7 +36,8 @@ package org.logicng.formulas.cache;
 public enum FunctionCacheEntry implements CacheEntry {
     SUBFORMULAS("sub-formulas"),
     VARPROFILE("variable profile"),
-    LITPROFILE("literal profile");
+    LITPROFILE("literal profile"),
+    DNNF_MODELCOUNT("dnnf model count");
 
     private final String description;
 
@@ -50,6 +51,6 @@ public enum FunctionCacheEntry implements CacheEntry {
 
     @Override
     public String description() {
-        return "FunctionCacheEntry{description=" + description + "}";
+        return "FunctionCacheEntry{description=" + this.description + "}";
     }
 }
