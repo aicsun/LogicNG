@@ -1,6 +1,6 @@
 package org.logicng.dnnf.datastructures.dtree;
 
-import org.logicng.dnnf.DnnfSATSolver;
+import org.logicng.dnnf.DNNFSATSolver;
 import org.logicng.formulas.Variable;
 
 import java.util.BitSet;
@@ -13,7 +13,7 @@ import java.util.SortedSet;
  */
 public interface DTree {
 
-    void initialize(final DnnfSATSolver solver);
+    void initialize(final DNNFSATSolver solver);
 
     int size();
 

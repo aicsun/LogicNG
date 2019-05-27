@@ -6,7 +6,7 @@ import org.logicng.formulas.Literal;
 
 import java.util.BitSet;
 
-public interface DnnfSATSolver {
+public interface DNNFSATSolver {
 
     void add(final Formula formula);
 

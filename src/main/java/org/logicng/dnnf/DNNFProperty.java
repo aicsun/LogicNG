@@ -1,13 +1,13 @@
 package org.logicng.dnnf;
 
-public enum DnnfProperty {
+public enum DNNFProperty {
     DECOMPOSABLE("decomposable"),
     DETERMINISTIC("deterministic"),
     SMOOTH("smooth");
 
     private final String description;
 
-    DnnfProperty(final String description) {
+    DNNFProperty(final String description) {
         this.description = description;
     }
 

@@ -21,14 +21,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-final class DnnfCompiler {
+final class DNNFCompiler {
 
     private final FormulaFactory f;
 
     private final Formula cnf;
     private final Formula unitClauses;
     private final Formula nonUnitClauses;
-    private final DnnfSATSolver solver;
+    private final DNNFSATSolver solver;
 
     private final int numberOfVariables;
 
@@ -41,13 +41,13 @@ final class DnnfCompiler {
     private final List<Formula> leafResultOperands;
     private final List<Literal> leafCurrentLiterals;
 
-    DnnfCompiler(final Formula formula) {
+    DNNFCompiler(final Formula formula) {
         this.f = formula.factory();
         this.cnf = formula.cnf();
         final Pair<Formula, Formula> pair = initializeClauses();
         this.unitClauses = this.f.and(pair.first());
         this.nonUnitClauses = this.f.and(pair.second());
-        this.solver = new DnnfMiniSatStyleSolver(this.f, this.cnf.variables().size());
+        this.solver = new DNNFMiniSatStyleSolver(this.f, this.cnf.variables().size());
         this.solver.add(this.cnf);
         this.numberOfVariables = this.cnf.variables().size();
         this.cache = new HashMap<>();

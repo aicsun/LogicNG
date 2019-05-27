@@ -2,7 +2,7 @@ package org.logicng.dnnf.datastructures.dtree;
 
 import org.logicng.collections.LNGIntVector;
 import org.logicng.datastructures.Tristate;
-import org.logicng.dnnf.DnnfSATSolver;
+import org.logicng.dnnf.DNNFSATSolver;
 import org.logicng.formulas.Variable;
 import org.logicng.solvers.sat.MiniSatStyleSolver;
 
@@ -17,7 +17,7 @@ public class DTreeNode implements DTree {
     private final DTree right;
     private final int size;
 
-    private DnnfSATSolver solver;
+    private DNNFSATSolver solver;
 
     private int[] staticVariables;
     private int[] staticSeparator;
@@ -74,7 +74,7 @@ public class DTreeNode implements DTree {
     }
 
     @Override
-    public void initialize(final DnnfSATSolver solver) {
+    public void initialize(final DNNFSATSolver solver) {
         this.solver = solver;
         this.left.initialize(solver);
         this.right.initialize(solver);

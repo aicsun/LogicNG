@@ -64,7 +64,7 @@ public class DnnfCompilerTest {
     }
 
     private void testSmallFormula(final Formula formula) {
-        final DnnfFactory dnnfFactory = new DnnfFactory();
+        final DNNFFactory dnnfFactory = new DNNFFactory();
         final DNNF dnnf = dnnfFactory.compile(formula);
         final BigDecimal dnnfCount = dnnf.modelCount();
         final Formula equivalence = this.f.equivalence(formula, dnnf.formula());

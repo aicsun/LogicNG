@@ -12,12 +12,12 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public final class DnnfFactory {
+public final class DNNFFactory {
 
     private final BackboneSimplifier backboneSimplifier;
     private final CNFSubsumption subsumption;
 
-    public DnnfFactory() {
+    public DNNFFactory() {
         this.backboneSimplifier = new BackboneSimplifier();
         this.subsumption = new CNFSubsumption();
     }
@@ -27,9 +27,9 @@ public final class DnnfFactory {
         final Formula cnf = formula.cnf();
         originalVariables.addAll(cnf.variables());
         final Formula simplifedFormula = simplifyFormula(cnf);
-        final DnnfCompiler compiler = new DnnfCompiler(simplifedFormula);
+        final DNNFCompiler compiler = new DNNFCompiler(simplifedFormula);
         final Formula dnnf = compiler.compile(new MinFillDTreeGenerator());
-        final Set<DnnfProperty> properties = EnumSet.of(DnnfProperty.DECOMPOSABLE, DnnfProperty.DETERMINISTIC);
+        final Set<DNNFProperty> properties = EnumSet.of(DNNFProperty.DECOMPOSABLE, DNNFProperty.DETERMINISTIC);
         return new DNNF(originalVariables, properties, dnnf);
     }
 

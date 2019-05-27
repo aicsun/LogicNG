@@ -1,7 +1,7 @@
 package org.logicng.dnnf.datastructures.dtree;
 
 import org.logicng.datastructures.Tristate;
-import org.logicng.dnnf.DnnfSATSolver;
+import org.logicng.dnnf.DNNFSATSolver;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.Literal;
 import org.logicng.formulas.Variable;
@@ -26,7 +26,7 @@ public class DTreeLeaf implements DTree {
     private final int[] separator = new int[0];
     private final BitSet separatorBitSet = new BitSet();
 
-    private DnnfSATSolver solver;
+    private DNNFSATSolver solver;
     private final int[] staticClauseIds;
 
     public DTreeLeaf(final int id, final Formula clause) {
@@ -38,7 +38,7 @@ public class DTreeLeaf implements DTree {
     }
 
     @Override
-    public void initialize(final DnnfSATSolver solver) {
+    public void initialize(final DNNFSATSolver solver) {
         this.solver = solver;
         final SortedSet<Literal> lits = this.clause.literals();
         final int size = lits.size();

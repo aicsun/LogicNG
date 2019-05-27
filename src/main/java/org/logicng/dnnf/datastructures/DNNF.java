@@ -1,6 +1,6 @@
 package org.logicng.dnnf.datastructures;
 
-import org.logicng.dnnf.DnnfProperty;
+import org.logicng.dnnf.DNNFProperty;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.Variable;
 import org.logicng.formulas.cache.FunctionCacheEntry;
@@ -17,16 +17,16 @@ import java.util.TreeSet;
 public class DNNF {
 
     private final SortedSet<Variable> originalVariables;
-    private final Set<DnnfProperty> properties;
+    private final Set<DNNFProperty> properties;
     private final Formula formula;
 
-    public DNNF(final SortedSet<Variable> originalVariables, final Set<DnnfProperty> properties, final Formula dnnf) {
+    public DNNF(final SortedSet<Variable> originalVariables, final Set<DNNFProperty> properties, final Formula dnnf) {
         this.originalVariables = originalVariables;
         this.properties = properties;
         this.formula = dnnf;
     }
 
-    public Set<DnnfProperty> properties() {
+    public Set<DNNFProperty> properties() {
         return this.properties;
     }
 

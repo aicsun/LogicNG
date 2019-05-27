@@ -15,7 +15,7 @@ import java.util.BitSet;
 import java.util.Collection;
 import java.util.List;
 
-public final class DnnfMiniSatStyleSolver extends MiniSat2Solver implements DnnfSATSolver {
+public final class DNNFMiniSatStyleSolver extends MiniSat2Solver implements DNNFSATSolver {
 
     private boolean newlyImpliedDirty = false;
     private int assertionLevel = -1;
@@ -26,7 +26,7 @@ public final class DnnfMiniSatStyleSolver extends MiniSat2Solver implements Dnnf
     // reduce object allocation
     private final List<Literal> impliedOperands;
 
-    public DnnfMiniSatStyleSolver(final FormulaFactory f, final int numberOfVariables) {
+    public DNNFMiniSatStyleSolver(final FormulaFactory f, final int numberOfVariables) {
         this.f = f;
         this.assignment = new Tristate[2 * numberOfVariables];
         for (int i = 0; i < this.assignment.length; i++) {
