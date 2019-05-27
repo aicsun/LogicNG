@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-public final class DnnfCompiler {
+final class DnnfCompiler {
 
     private final FormulaFactory f;
 
@@ -30,7 +30,6 @@ public final class DnnfCompiler {
     private final Formula nonUnitClauses;
     private final DnnfSATSolver solver;
 
-    private final int numberOfClauses;
     private final int numberOfVariables;
 
     private final Map<BitSet, Formula> cache;
@@ -42,7 +41,7 @@ public final class DnnfCompiler {
     private final List<Formula> leafResultOperands;
     private final List<Literal> leafCurrentLiterals;
 
-    public DnnfCompiler(final Formula formula) {
+    DnnfCompiler(final Formula formula) {
         this.f = formula.factory();
         this.cnf = formula.cnf();
         final Pair<Formula, Formula> pair = initializeClauses();
@@ -50,7 +49,6 @@ public final class DnnfCompiler {
         this.nonUnitClauses = this.f.and(pair.second());
         this.solver = new DnnfMiniSatStyleSolver(this.f, this.cnf.variables().size());
         this.solver.add(this.cnf);
-        this.numberOfClauses = this.cnf.numberOfOperands();
         this.numberOfVariables = this.cnf.variables().size();
         this.cache = new HashMap<>();
         final int maxClauseSize = computeMaxClauseSize(this.cnf);
@@ -97,7 +95,11 @@ public final class DnnfCompiler {
         return new Pair<>(this.f.and(units), this.f.and(nonUnits));
     }
 
-    public DTree generateDTree(final DTreeGenerator generator) {
+    Formula compile(final DTreeGenerator generator) {
+        return compile(generator, null);
+    }
+
+    private DTree generateDTree(final DTreeGenerator generator) {
         if (this.nonUnitClauses.isAtomicFormula()) {
             return null;
         }
@@ -106,11 +108,7 @@ public final class DnnfCompiler {
         return tree;
     }
 
-    public Formula compile(final DTreeGenerator generator) {
-        return compile(generator, null);
-    }
-
-    public Formula compile(final DTreeGenerator generator, final DnnfCompilationHandler handler) {
+    private Formula compile(final DTreeGenerator generator, final DnnfCompilationHandler handler) {
         if (!this.cnf.holds(new SATPredicate(this.f))) {
             return this.f.falsum();
         }
@@ -118,7 +116,7 @@ public final class DnnfCompiler {
         return compile(dTree, handler);
     }
 
-    public Formula compile(final DTree dTree, final DnnfCompilationHandler handler) {
+    private Formula compile(final DTree dTree, final DnnfCompilationHandler handler) {
         if (this.nonUnitClauses.isAtomicFormula()) {
             return this.cnf;
         }
@@ -231,10 +229,6 @@ public final class DnnfCompiler {
             }
         }
         return max;
-    }
-
-    private int chooseShannonVariableVarActivity(final BitSet separator) {
-        return this.solver.highestVarActivity(separator);
     }
 
     private Formula conjoin(final Formula implied, final DTreeNode tree, final int currentShannons) throws TimeoutException {
