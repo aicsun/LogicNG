@@ -1,4 +1,4 @@
-package org.logicng.dnnf.dtree;
+package org.logicng.dnnf.datastructures.dtree;
 
 import org.logicng.dnnf.DnnfSATSolver;
 import org.logicng.formulas.Variable;

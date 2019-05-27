@@ -1,12 +1,10 @@
 package org.logicng.dnnf;
 
-import org.logicng.dnnf.dtree.MinFillDTreeGenerator;
+import org.logicng.dnnf.datastructures.dtree.MinFillDTreeGenerator;
 import org.logicng.formulas.FType;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.Variable;
-import org.logicng.functions.DnnfModelCountFunction;
 
-import java.math.BigInteger;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -53,19 +51,19 @@ public final class DnnfFactory {
         return result;
     }
 
-    public BigInteger modelCount(final Formula formula, final int numberOfVariables) {
-        final int formulaVars = formula.variables().size();
-        if (numberOfVariables < formulaVars) {
-            throw new IllegalArgumentException("Given number of variables is smaller than the actual number of variables.");
-        }
-        final EnumSet<DnnfProperty> properties = this.knownFormulas.get(formula);
-        if (properties == null || !properties.contains(DnnfProperty.DETERMINISTIC) || !isDecomposable(formula)) {
-            throw new IllegalArgumentException("Cannot verify that the given formula is a d-DNNF.");
-        }
-
-        final BigInteger factor = BigInteger.valueOf(2).pow(numberOfVariables - formulaVars);
-        return formula.apply(new DnnfModelCountFunction()).multiply(factor);
-    }
+    //public BigInteger modelCount(final Formula formula, final int numberOfVariables) {
+    //    final int formulaVars = formula.variables().size();
+    //    if (numberOfVariables < formulaVars) {
+    //        throw new IllegalArgumentException("Given number of variables is smaller than the actual number of variables.");
+    //    }
+    //    final EnumSet<DnnfProperty> properties = this.knownFormulas.get(formula);
+    //    if (properties == null || !properties.contains(DnnfProperty.DETERMINISTIC) || !isDecomposable(formula)) {
+    //        throw new IllegalArgumentException("Cannot verify that the given formula is a d-DNNF.");
+    //    }
+    //
+    //    final BigInteger factor = BigInteger.valueOf(2).pow(numberOfVariables - formulaVars);
+    //    return formula.apply(new DnnfModelCountFunction()).multiply(factor);
+    //}
 
     public boolean isDecomposable(final Formula formula) {
         EnumSet<DnnfProperty> properties = this.knownFormulas.get(formula);

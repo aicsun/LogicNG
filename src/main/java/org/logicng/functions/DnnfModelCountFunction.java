@@ -28,6 +28,7 @@ public final class DnnfModelCountFunction implements FormulaFunction<BigInteger>
         if (c == null) {
             switch (dnnf.type()) {
                 case LITERAL:
+                case TRUE:
                     c = BigInteger.ONE;
                     break;
                 case AND:
@@ -44,9 +45,6 @@ public final class DnnfModelCountFunction implements FormulaFunction<BigInteger>
                         final BigInteger factor = BigInteger.valueOf(2L).pow(allVariables - op.variables().size());
                         c = c.add(opCount.multiply(factor));
                     }
-                    break;
-                case TRUE:
-                    c = BigInteger.ONE;
                     break;
                 case FALSE:
                     c = BigInteger.ZERO;

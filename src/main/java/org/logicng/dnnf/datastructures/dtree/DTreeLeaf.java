@@ -1,4 +1,4 @@
-package org.logicng.dnnf.dtree;
+package org.logicng.dnnf.datastructures.dtree;
 
 import org.logicng.datastructures.Tristate;
 import org.logicng.dnnf.DnnfSATSolver;

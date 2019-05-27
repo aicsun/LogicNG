@@ -1,9 +1,9 @@
 package org.logicng.dnnf;
 
-import org.logicng.dnnf.dtree.DTree;
-import org.logicng.dnnf.dtree.DTreeGenerator;
-import org.logicng.dnnf.dtree.DTreeLeaf;
-import org.logicng.dnnf.dtree.DTreeNode;
+import org.logicng.dnnf.datastructures.dtree.DTree;
+import org.logicng.dnnf.datastructures.dtree.DTreeGenerator;
+import org.logicng.dnnf.datastructures.dtree.DTreeLeaf;
+import org.logicng.dnnf.datastructures.dtree.DTreeNode;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaFactory;
 import org.logicng.formulas.Literal;
@@ -45,14 +45,12 @@ public final class DnnfCompiler {
 
     public DnnfCompiler(final Formula formula) {
         this.f = formula.factory();
-
         this.cnf = formula.cnf();
         final Pair<Formula, Formula> pair = initializeClauses();
         this.unitClauses = this.f.and(pair.first());
         this.nonUnitClauses = this.f.and(pair.second());
-
-        this.solver = new DnnfMiniSatStyleSolver(this.f, formula.variables().size());
-        this.solver.add(formula);
+        this.solver = new DnnfMiniSatStyleSolver(this.f, this.cnf.variables().size());
+        this.solver.add(this.cnf);
         this.numberOfClauses = this.cnf.numberOfOperands();
         this.numberOfVariables = this.cnf.variables().size();
         this.cache = new HashMap<>();
@@ -105,11 +103,7 @@ public final class DnnfCompiler {
             return null;
         }
         final DTree tree = generator.generate(this.nonUnitClauses);
-        //    final DTree tree = generator.generate(cnf);
-        System.out.println("Start initialize");
-        final long start = System.currentTimeMillis();
         tree.initialize(this.solver);
-        System.out.println("Initialize-Time: " + (System.currentTimeMillis() - start));
         return tree;
     }
 
