@@ -7,8 +7,8 @@ import org.logicng.formulas.Literal;
 import org.logicng.formulas.Variable;
 import org.logicng.solvers.sat.MiniSatStyleSolver;
 
+import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.SortedSet;
 
@@ -191,7 +191,7 @@ public class DTreeLeaf implements DTree {
 
     @Override
     public List<DTreeLeaf> leafs() {
-        final List<DTreeLeaf> result = new LinkedList<>();
+        final List<DTreeLeaf> result = new ArrayList<>();
         result.add(this);
         return result;
     }

@@ -25,14 +25,14 @@ public abstract class EliminatingOrderDTreeGenerator implements DTreeGenerator {
             return new DTreeLeaf(0, cnf);
         }
 
-        final LinkedList<DTree> sigma = new LinkedList<>();
+        final List<DTree> sigma = new LinkedList<>();
         int id = 0;
         for (final Formula clause : cnf) {
             sigma.add(new DTreeLeaf(id++, clause));
         }
 
         for (final Literal variable : ordering) {
-            final LinkedList<DTree> gamma = new LinkedList<>();
+            final List<DTree> gamma = new LinkedList<>();
             final Iterator<DTree> sigmaIterator = sigma.iterator();
             while (sigmaIterator.hasNext()) {
                 final DTree tree = sigmaIterator.next();

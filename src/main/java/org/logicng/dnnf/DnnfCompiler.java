@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
@@ -77,8 +76,8 @@ public final class DnnfCompiler {
     }
 
     private Pair<Formula, Formula> initializeClauses() {
-        final List<Formula> units = new LinkedList<>();
-        final List<Formula> nonUnits = new LinkedList<>();
+        final List<Formula> units = new ArrayList<>();
+        final List<Formula> nonUnits = new ArrayList<>();
         switch (this.cnf.type()) {
             case AND:
                 for (final Formula clause : this.cnf) {

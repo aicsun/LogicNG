@@ -1,14 +1,12 @@
 package org.logicng.dnnf.datastructures.dtree;
 
+import org.logicng.collections.LNGIntVector;
 import org.logicng.datastructures.Tristate;
 import org.logicng.dnnf.DnnfSATSolver;
 import org.logicng.formulas.Variable;
 import org.logicng.solvers.sat.MiniSatStyleSolver;
 
-import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -91,28 +89,22 @@ public class DTreeNode implements DTree {
         this.localLeftVarSet = new BitSet(this.staticVariables[this.staticVariables.length - 1]);
         this.localRightVarSet = new BitSet(this.staticVariables[this.staticVariables.length - 1]);
 
-        final List<Integer> lClauseContents = new ArrayList<>();
+        final LNGIntVector lClauseContents = new LNGIntVector();
         for (final DTreeLeaf leaf : this.leftLeafs) {
             for (final int i : leaf.literals()) {
-                lClauseContents.add(i);
+                lClauseContents.push(i);
             }
-            lClauseContents.add(-leaf.getId() - 1);
+            lClauseContents.push(-leaf.getId() - 1);
         }
-        this.leftClauseContents = new int[lClauseContents.size()];
-        for (int i = 0; i < this.leftClauseContents.length; i++) {
-            this.leftClauseContents[i] = lClauseContents.get(i);
-        }
-        final List<Integer> rClauseContents = new LinkedList<>();
+        this.leftClauseContents = lClauseContents.toArray();
+        final LNGIntVector rClauseContents = new LNGIntVector();
         for (final DTreeLeaf leaf : this.rightLeafs) {
             for (final int i : leaf.literals()) {
-                rClauseContents.add(i);
+                rClauseContents.push(i);
             }
-            rClauseContents.add(-leaf.getId() - 1);
+            rClauseContents.push(-leaf.getId() - 1);
         }
-        this.rightClauseContents = new int[rClauseContents.size()];
-        for (int i = 0; i < this.rightClauseContents.length; i++) {
-            this.rightClauseContents[i] = rClauseContents.get(i);
-        }
+        this.rightClauseContents = rClauseContents.toArray();
         this.clauseContents = new int[this.leftClauseContents.length + this.rightClauseContents.length];
         System.arraycopy(this.leftClauseContents, 0, this.clauseContents, 0, this.leftClauseContents.length);
         System.arraycopy(this.rightClauseContents, 0, this.clauseContents, this.leftClauseContents.length, this.rightClauseContents.length);
@@ -170,7 +162,7 @@ public class DTreeNode implements DTree {
             int j = i;
             boolean subsumed = false;
             while (clausesContents[j] >= 0) {
-                if (this.solver.valueOf(clausesContents[j]) == Tristate.TRUE) {
+                if (!subsumed && this.solver.valueOf(clausesContents[j]) == Tristate.TRUE) {
                     subsumed = true;
                 }
                 j++;
@@ -198,7 +190,7 @@ public class DTreeNode implements DTree {
             int j = i;
             boolean subsumed = false;
             while (this.clauseContents[j] >= 0) {
-                if (this.solver.valueOf(this.clauseContents[j]) == Tristate.TRUE) {
+                if (!subsumed && this.solver.valueOf(this.clauseContents[j]) == Tristate.TRUE) {
                     subsumed = true;
                 }
                 j++;
@@ -245,12 +237,7 @@ public class DTreeNode implements DTree {
     }
 
     private void excludeUnitLeafs(final List<DTreeLeaf> leafs) {
-        final Iterator<DTreeLeaf> it = leafs.iterator();
-        while (it.hasNext()) {
-            if (it.next().clauseSize() == 1) {
-                it.remove();
-            }
-        }
+        leafs.removeIf(dTreeLeaf -> dTreeLeaf.clauseSize() == 1);
     }
 
     public static int[] toArray(final BitSet bits) {
