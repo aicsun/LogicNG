@@ -54,7 +54,8 @@ public final class ContingencyPredicate implements FormulaPredicate {
     }
 
     /**
-     * Constructs a new contingency predicate with a given SAT solver.
+     * Constructs a new contingency predicate with a given SAT solver.  If there are already formulas on the solver,
+     * these formulas are kept and the contingency is checked against these formulas.  The solver state is not changed.
      * @param solver the SAT solver
      */
     public ContingencyPredicate(final SATSolver solver) {

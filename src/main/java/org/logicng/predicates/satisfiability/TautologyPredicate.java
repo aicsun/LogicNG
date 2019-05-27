@@ -56,7 +56,8 @@ public final class TautologyPredicate implements FormulaPredicate {
     }
 
     /**
-     * Constructs a new tautology predicate with a given SAT solver.
+     * Constructs a new tautology predicate with a given SAT solver.  If there are already formulas on the solver,
+     * these formulas are kept and tautology is checked against these formulas.  The solver state is not changed.
      * @param solver the SAT solver
      */
     public TautologyPredicate(final SATSolver solver) {
