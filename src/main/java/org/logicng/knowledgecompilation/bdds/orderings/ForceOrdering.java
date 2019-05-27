@@ -33,7 +33,6 @@ import org.logicng.formulas.Variable;
 import org.logicng.graphs.datastructures.Hypergraph;
 import org.logicng.graphs.datastructures.HypergraphNode;
 import org.logicng.graphs.generators.HypergraphGenerator;
-import org.logicng.predicates.CNFPredicate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +42,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * Simple implementation of the FORCE BDD variable ordering due to Aloul, Markov, and Sakallah.  This ordering only
@@ -52,27 +54,24 @@ import java.util.Map;
  */
 public class ForceOrdering implements VariableOrderingProvider {
 
-    private static final Comparator<? super Map.Entry<HypergraphNode<Variable>, Double>> COMPARATOR =
-            new Comparator<Map.Entry<HypergraphNode<Variable>, Double>>() {
-                @Override
-                public int compare(final Map.Entry<HypergraphNode<Variable>, Double> o1, final Map.Entry<HypergraphNode<Variable>, Double> o2) {
-                    return o1.getValue().compareTo(o2.getValue());
-                }
-            };
+    private static final Comparator<? super Map.Entry<HypergraphNode<Variable>, Double>> COMPARATOR = Comparator.comparing(Map.Entry::getValue);
 
     private final DFSOrdering dfsOrdering = new DFSOrdering();
 
     @Override
     public List<Variable> getOrder(final Formula formula) {
-        if (!formula.holds(new CNFPredicate())) {
-            throw new IllegalArgumentException("FORCE variable ordering can only be applied to CNF formulas.");
-        }
-        final Hypergraph<Variable> hypergraph = HypergraphGenerator.fromCNF(formula);
+        final SortedSet<Variable> originalVariables = new TreeSet<>(formula.variables());
+        final Formula nnf = formula.nnf();
+        originalVariables.addAll(nnf.variables());
+        final Formula cnf = nnf.cnf();
+        final Hypergraph<Variable> hypergraph = HypergraphGenerator.fromCNF(cnf);
         final Map<Variable, HypergraphNode<Variable>> nodes = new HashMap<>();
         for (final HypergraphNode<Variable> node : hypergraph.nodes()) {
             nodes.put(node.content(), node);
         }
-        return force(formula, hypergraph, nodes);
+        final List<Variable> ordering = force(cnf, hypergraph, nodes).stream().filter(originalVariables::contains).collect(Collectors.toList());
+        originalVariables.stream().filter(v -> !ordering.contains(v)).forEach(ordering::add);
+        return ordering;
     }
 
     /**

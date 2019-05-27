@@ -6,7 +6,6 @@ import org.logicng.formulas.Variable;
 import org.logicng.formulas.cache.FunctionCacheEntry;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -39,10 +38,6 @@ public class DNNF {
     }
 
     public BigDecimal modelCount() {
-        return modelCount(Collections.emptySortedSet());
-    }
-
-    public BigDecimal modelCount(final SortedSet<Variable> relevantVariables) {
         final Object cached = this.formula.functionCacheEntry(FunctionCacheEntry.DNNF_MODELCOUNT);
         final BigDecimal result;
         if (cached != null) {
@@ -52,11 +47,6 @@ public class DNNF {
         }
         this.formula.setFunctionCacheEntry(FunctionCacheEntry.DNNF_MODELCOUNT, result);
         final SortedSet<Variable> dontCareVariables = new TreeSet<>();
-        for (final Variable relevantVariable : relevantVariables) {
-            if (!this.originalVariables.contains(relevantVariable)) {
-                dontCareVariables.add(relevantVariable);
-            }
-        }
         final SortedSet<Variable> dnnfVariables = this.formula.variables();
         for (final Variable originalVariable : this.originalVariables) {
             if (!dnnfVariables.contains(originalVariable)) {

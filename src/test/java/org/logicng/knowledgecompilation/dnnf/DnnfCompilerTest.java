@@ -9,17 +9,14 @@ import org.logicng.dnnf.datastructures.DNNF;
 import org.logicng.formulas.FType;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaFactory;
-import org.logicng.formulas.Variable;
 import org.logicng.io.parsers.FormulaParser;
 import org.logicng.io.parsers.ParserException;
 import org.logicng.io.parsers.PseudoBooleanParser;
 import org.logicng.io.readers.DimacsReader;
 import org.logicng.predicates.satisfiability.TautologyPredicate;
-import org.logicng.transformations.cnf.CNFFactorization;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DnnfCompilerTest {
@@ -80,12 +77,8 @@ public class DnnfCompilerTest {
             return BigDecimal.ZERO;
         }
         final BDDFactory factory = new BDDFactory(100000, 1000000, formula.factory());
-
-        final Formula cnf = formula.transform(new CNFFactorization());
-        final List<Variable> order = new ArrayList<>(new ForceOrdering().getOrder(cnf));
-        formula.variables().stream().filter(v -> !order.contains(v)).forEach(order::add);
-        factory.setVariableOrder(order);
-        final BDD bdd = factory.build(cnf);
+        factory.setVariableOrder(new ForceOrdering().getOrder(formula));
+        final BDD bdd = factory.build(formula);
         return bdd.modelCount();
     }
 }
