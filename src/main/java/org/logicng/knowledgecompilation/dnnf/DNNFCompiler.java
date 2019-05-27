@@ -1,13 +1,13 @@
-package org.logicng.dnnf;
+package org.logicng.knowledgecompilation.dnnf;
 
-import org.logicng.dnnf.datastructures.dtree.DTree;
-import org.logicng.dnnf.datastructures.dtree.DTreeGenerator;
-import org.logicng.dnnf.datastructures.dtree.DTreeLeaf;
-import org.logicng.dnnf.datastructures.dtree.DTreeNode;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaFactory;
 import org.logicng.formulas.Literal;
 import org.logicng.handlers.DnnfCompilationHandler;
+import org.logicng.knowledgecompilation.dnnf.datastructures.dtree.DTree;
+import org.logicng.knowledgecompilation.dnnf.datastructures.dtree.DTreeGenerator;
+import org.logicng.knowledgecompilation.dnnf.datastructures.dtree.DTreeLeaf;
+import org.logicng.knowledgecompilation.dnnf.datastructures.dtree.DTreeNode;
 import org.logicng.predicates.satisfiability.SATPredicate;
 import org.logicng.solvers.sat.MiniSatStyleSolver;
 import org.logicng.util.Pair;

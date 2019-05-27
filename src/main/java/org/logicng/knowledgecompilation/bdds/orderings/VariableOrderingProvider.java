@@ -26,7 +26,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.orderings;
+package org.logicng.knowledgecompilation.bdds.orderings;
 
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.Variable;
@@ -42,7 +42,7 @@ public interface VariableOrderingProvider {
 
     /**
      * Generates a variable ordering for a given formula.  Such a variable ordering can then be
-     * used in the {@link org.logicng.bdds.BDDFactory#setVariableOrder(List)} method.
+     * used in the {@link org.logicng.knowledgecompilation.bdds.BDDFactory#setVariableOrder(List)} method.
      * @param formula the formula
      * @return the variable ordering
      */

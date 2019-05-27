@@ -26,7 +26,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.orderings;
+package org.logicng.knowledgecompilation.bdds.orderings;
 
 import org.logicng.formulas.BinaryOperator;
 import org.logicng.formulas.Formula;

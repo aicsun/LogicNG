@@ -55,15 +55,10 @@ OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR
 MODIFICATIONS.
 ========================================================================*/
 
-package org.logicng.bdds;
+package org.logicng.knowledgecompilation.bdds;
 
 import static org.logicng.formulas.FType.AND;
 
-import org.logicng.bdds.datastructures.BDD;
-import org.logicng.bdds.datastructures.BDDConstant;
-import org.logicng.bdds.datastructures.BDDInnerNode;
-import org.logicng.bdds.datastructures.BDDNode;
-import org.logicng.bdds.jbuddy.BDDKernel;
 import org.logicng.collections.LNGVector;
 import org.logicng.datastructures.Assignment;
 import org.logicng.formulas.Equivalence;
@@ -73,6 +68,11 @@ import org.logicng.formulas.Implication;
 import org.logicng.formulas.Literal;
 import org.logicng.formulas.Not;
 import org.logicng.formulas.Variable;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDD;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDDConstant;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDDInnerNode;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDDNode;
+import org.logicng.knowledgecompilation.bdds.jbuddy.BDDKernel;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -401,7 +401,7 @@ public final class BDDFactory {
         final int supportBDD = this.kernel.support(bdd.index());
         final Assignment assignment = createAssignment(supportBDD);
         assert assignment == null || assignment.negativeLiterals().isEmpty();
-        return assignment == null ? new TreeSet<Variable>() : new TreeSet<>(assignment.positiveLiterals());
+        return assignment == null ? new TreeSet<>() : new TreeSet<>(assignment.positiveLiterals());
     }
 
     /**

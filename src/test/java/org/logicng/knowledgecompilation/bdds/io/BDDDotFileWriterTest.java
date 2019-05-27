@@ -26,15 +26,15 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.io;
+package org.logicng.knowledgecompilation.bdds.io;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.logicng.bdds.BDDFactory;
-import org.logicng.bdds.datastructures.BDD;
 import org.logicng.formulas.FormulaFactory;
 import org.logicng.io.parsers.ParserException;
 import org.logicng.io.parsers.PropositionalParser;
+import org.logicng.knowledgecompilation.bdds.BDDFactory;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDD;
 
 import java.io.BufferedReader;
 import java.io.File;

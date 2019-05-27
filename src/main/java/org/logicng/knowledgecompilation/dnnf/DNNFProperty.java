@@ -1,4 +1,4 @@
-package org.logicng.dnnf;
+package org.logicng.knowledgecompilation.dnnf;
 
 public enum DNNFProperty {
     DECOMPOSABLE("decomposable"),

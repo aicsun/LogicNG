@@ -26,7 +26,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.datastructures;
+package org.logicng.knowledgecompilation.bdds.datastructures;
 
 import org.logicng.formulas.Constant;
 import org.logicng.formulas.Formula;
@@ -94,7 +94,7 @@ public final class BDDConstant implements BDDNode {
 
     @Override
     public Set<BDDNode> nodes() {
-        return new HashSet<BDDNode>(Collections.singletonList(this));
+        return new HashSet<>(Collections.singletonList(this));
     }
 
     @Override

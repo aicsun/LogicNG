@@ -55,7 +55,7 @@ OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR
 MODIFICATIONS.
 ========================================================================*/
 
-package org.logicng.bdds.jbuddy;
+package org.logicng.knowledgecompilation.bdds.jbuddy;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -26,7 +26,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.datastructures;
+package org.logicng.knowledgecompilation.bdds.datastructures;
 
 import org.logicng.formulas.Variable;
 
@@ -80,7 +80,7 @@ public final class BDDInnerNode implements BDDNode {
 
     @Override
     public Set<BDDNode> nodes() {
-        final Set<BDDNode> res = new HashSet<BDDNode>(Collections.singleton(this));
+        final Set<BDDNode> res = new HashSet<>(Collections.singleton(this));
         res.addAll(this.low.nodes());
         res.addAll(this.high.nodes());
         return res;

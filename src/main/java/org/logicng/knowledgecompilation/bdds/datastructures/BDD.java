@@ -26,13 +26,13 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.datastructures;
+package org.logicng.knowledgecompilation.bdds.datastructures;
 
-import org.logicng.bdds.BDDFactory;
 import org.logicng.datastructures.Assignment;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.Literal;
 import org.logicng.formulas.Variable;
+import org.logicng.knowledgecompilation.bdds.BDDFactory;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

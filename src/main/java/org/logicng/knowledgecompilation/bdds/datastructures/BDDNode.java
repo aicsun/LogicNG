@@ -26,7 +26,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.datastructures;
+package org.logicng.knowledgecompilation.bdds.datastructures;
 
 import org.logicng.formulas.Formula;
 

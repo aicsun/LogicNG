@@ -1,10 +1,10 @@
-package org.logicng.dnnf.datastructures.dtree;
+package org.logicng.knowledgecompilation.dnnf.datastructures.dtree;
 
 import org.logicng.datastructures.Tristate;
-import org.logicng.dnnf.DNNFSATSolver;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.Literal;
 import org.logicng.formulas.Variable;
+import org.logicng.knowledgecompilation.dnnf.DNNFSATSolver;
 import org.logicng.solvers.sat.MiniSatStyleSolver;
 
 import java.util.ArrayList;

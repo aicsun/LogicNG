@@ -28,14 +28,14 @@
 
 package org.logicng.formulas;
 
-import org.logicng.bdds.BDDFactory;
-import org.logicng.bdds.datastructures.BDD;
-import org.logicng.bdds.orderings.VariableOrdering;
-import org.logicng.bdds.orderings.VariableOrderingProvider;
 import org.logicng.datastructures.Assignment;
 import org.logicng.datastructures.Substitution;
 import org.logicng.datastructures.Tristate;
 import org.logicng.formulas.cache.CacheEntry;
+import org.logicng.knowledgecompilation.bdds.BDDFactory;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDD;
+import org.logicng.knowledgecompilation.bdds.orderings.VariableOrdering;
+import org.logicng.knowledgecompilation.bdds.orderings.VariableOrderingProvider;
 
 import java.util.HashMap;
 import java.util.Map;

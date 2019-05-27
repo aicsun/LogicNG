@@ -1,9 +1,9 @@
-package org.logicng.dnnf.datastructures;
+package org.logicng.knowledgecompilation.dnnf.datastructures;
 
-import org.logicng.dnnf.DNNFProperty;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.Variable;
 import org.logicng.formulas.cache.FunctionCacheEntry;
+import org.logicng.knowledgecompilation.dnnf.DNNFProperty;
 
 import java.math.BigDecimal;
 import java.util.HashMap;

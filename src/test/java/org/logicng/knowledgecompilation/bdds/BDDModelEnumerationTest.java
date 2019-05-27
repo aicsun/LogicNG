@@ -26,18 +26,18 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds;
+package org.logicng.knowledgecompilation.bdds;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.logicng.bdds.datastructures.BDD;
 import org.logicng.datastructures.Assignment;
 import org.logicng.formulas.CType;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaFactory;
 import org.logicng.formulas.Variable;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDD;
 import org.logicng.testutils.NQueensGenerator;
 
 import java.math.BigDecimal;

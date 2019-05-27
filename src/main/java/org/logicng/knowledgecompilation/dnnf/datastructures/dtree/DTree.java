@@ -1,7 +1,7 @@
-package org.logicng.dnnf.datastructures.dtree;
+package org.logicng.knowledgecompilation.dnnf.datastructures.dtree;
 
-import org.logicng.dnnf.DNNFSATSolver;
 import org.logicng.formulas.Variable;
+import org.logicng.knowledgecompilation.dnnf.DNNFSATSolver;
 
 import java.util.BitSet;
 import java.util.List;

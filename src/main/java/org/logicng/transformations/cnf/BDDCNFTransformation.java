@@ -31,9 +31,9 @@ package org.logicng.transformations.cnf;
 import static org.logicng.formulas.FType.LITERAL;
 import static org.logicng.formulas.cache.TransformationCacheEntry.BDD_CNF;
 
-import org.logicng.bdds.BDDFactory;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaTransformation;
+import org.logicng.knowledgecompilation.bdds.BDDFactory;
 import org.logicng.predicates.CNFPredicate;
 import org.logicng.transformations.UnitPropagation;
 

@@ -1,4 +1,4 @@
-package org.logicng.dnnf.datastructures.dtree;
+package org.logicng.knowledgecompilation.dnnf.datastructures.dtree;
 
 import org.logicng.collections.LNGIntVector;
 import org.logicng.formulas.Formula;

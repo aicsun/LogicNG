@@ -1,13 +1,13 @@
-package org.logicng.bdds;
+package org.logicng.knowledgecompilation.bdds;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.logicng.bdds.jbuddy.BDDKernel;
 import org.logicng.formulas.FormulaFactory;
 import org.logicng.io.parsers.ParserException;
 import org.logicng.io.parsers.PropositionalParser;
+import org.logicng.knowledgecompilation.bdds.jbuddy.BDDKernel;
 
 /**
  * Unit tests for some low level BDD kernel methods.

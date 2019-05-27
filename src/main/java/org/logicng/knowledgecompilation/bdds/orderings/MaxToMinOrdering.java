@@ -26,9 +26,9 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.orderings;
+package org.logicng.knowledgecompilation.bdds.orderings;
 
-import static org.logicng.bdds.orderings.MinToMaxOrdering.sortProfileByOccurrence;
+import static org.logicng.knowledgecompilation.bdds.orderings.MinToMaxOrdering.sortProfileByOccurrence;
 
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.Variable;

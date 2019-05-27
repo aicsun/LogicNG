@@ -26,10 +26,10 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.io;
+package org.logicng.knowledgecompilation.bdds.io;
 
-import org.logicng.bdds.BDDFactory;
-import org.logicng.bdds.datastructures.BDD;
+import org.logicng.knowledgecompilation.bdds.BDDFactory;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDD;
 
 import java.io.BufferedWriter;
 import java.io.File;

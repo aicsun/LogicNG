@@ -30,7 +30,6 @@ package org.logicng.transformations.cnf;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.logicng.bdds.BDDFactory;
 import org.logicng.datastructures.Assignment;
 import org.logicng.formulas.F;
 import org.logicng.formulas.Formula;
@@ -39,6 +38,7 @@ import org.logicng.formulas.Variable;
 import org.logicng.io.parsers.ParserException;
 import org.logicng.io.parsers.PropositionalParser;
 import org.logicng.io.parsers.PseudoBooleanParser;
+import org.logicng.knowledgecompilation.bdds.BDDFactory;
 import org.logicng.predicates.CNFPredicate;
 import org.logicng.solvers.MiniSat;
 import org.logicng.solvers.SATSolver;

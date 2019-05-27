@@ -26,7 +26,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.orderings;
+package org.logicng.knowledgecompilation.bdds.orderings;
 
 /**
  * An enumeration for the different BDD variable orderings.  A variable ordering is associated

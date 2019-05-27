@@ -1,4 +1,4 @@
-package org.logicng.dnnf;
+package org.logicng.knowledgecompilation.dnnf;
 
 import org.logicng.collections.LNGIntVector;
 import org.logicng.datastructures.Tristate;

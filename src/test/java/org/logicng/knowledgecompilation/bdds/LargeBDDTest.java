@@ -26,14 +26,14 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds;
+package org.logicng.knowledgecompilation.bdds;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
-import org.logicng.bdds.datastructures.BDD;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaFactory;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDD;
 import org.logicng.predicates.CNFPredicate;
 import org.logicng.testutils.NQueensGenerator;
 import org.logicng.testutils.PigeonHoleGenerator;

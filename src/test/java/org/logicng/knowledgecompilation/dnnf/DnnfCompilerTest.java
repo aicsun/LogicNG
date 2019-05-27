@@ -1,11 +1,7 @@
-package org.logicng.dnnf;
+package org.logicng.knowledgecompilation.dnnf;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.logicng.bdds.BDDFactory;
-import org.logicng.bdds.datastructures.BDD;
-import org.logicng.bdds.orderings.ForceOrdering;
-import org.logicng.dnnf.datastructures.DNNF;
 import org.logicng.formulas.FType;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaFactory;
@@ -13,6 +9,10 @@ import org.logicng.io.parsers.FormulaParser;
 import org.logicng.io.parsers.ParserException;
 import org.logicng.io.parsers.PseudoBooleanParser;
 import org.logicng.io.readers.DimacsReader;
+import org.logicng.knowledgecompilation.bdds.BDDFactory;
+import org.logicng.knowledgecompilation.bdds.datastructures.BDD;
+import org.logicng.knowledgecompilation.bdds.orderings.ForceOrdering;
+import org.logicng.knowledgecompilation.dnnf.datastructures.DNNF;
 import org.logicng.predicates.satisfiability.TautologyPredicate;
 
 import java.io.IOException;

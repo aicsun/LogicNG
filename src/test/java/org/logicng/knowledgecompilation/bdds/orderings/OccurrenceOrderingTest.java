@@ -26,7 +26,7 @@
 //                                                                       //
 ///////////////////////////////////////////////////////////////////////////
 
-package org.logicng.bdds.orderings;
+package org.logicng.knowledgecompilation.bdds.orderings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
