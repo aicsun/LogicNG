@@ -57,6 +57,8 @@ MODIFICATIONS.
 
 package org.logicng.knowledgecompilation.bdds.jbuddy;
 
+import java.util.Arrays;
+
 /**
  * BDD Cache.
  * @version 1.4.0
@@ -89,9 +91,7 @@ final class BDDCache {
      * Resets (clears) the cache.
      */
     void reset() {
-        for (final BDDCacheEntry ce : this.table) {
-            ce.reset();
-        }
+        Arrays.stream(this.table).forEach(BDDCacheEntry::reset);
     }
 
     /**

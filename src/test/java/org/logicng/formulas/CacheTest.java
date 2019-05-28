@@ -76,7 +76,7 @@ public class CacheTest {
         Assert.assertTrue(valuesPred.contains(PredicateCacheEntry.valueOf("IS_SAT")));
 
         final List<FunctionCacheEntry> valuesFunc = Arrays.asList(FunctionCacheEntry.values());
-        Assert.assertEquals(3, valuesFunc.size());
+        Assert.assertEquals(4, valuesFunc.size());
         Assert.assertTrue(valuesFunc.contains(FunctionCacheEntry.valueOf("LITPROFILE")));
         Assert.assertTrue(valuesFunc.contains(FunctionCacheEntry.valueOf("SUBFORMULAS")));
     }

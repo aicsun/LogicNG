@@ -58,7 +58,7 @@ import java.util.TreeSet;
  * {@link #hasPositiveBackboneResult()}, {@link #hasNegativeBackboneResult()}, and
  * {@link #hasOptionalVariablesResult()} to check if a certain result set was computed and is present
  * in the backbone object.
- * @version 1.5.0
+ * @version 2.0.0
  * @since 1.5.0
  */
 public class Backbone {
@@ -137,9 +137,7 @@ public class Backbone {
             completeBackbone.addAll(this.positiveBackbone);
         }
         if (hasNegativeBackboneResult()) {
-            for (final Variable var : this.negativeBackbone) {
-                completeBackbone.add(var.negate());
-            }
+            this.negativeBackbone.stream().map(Literal::negate).forEach(completeBackbone::add);
         }
         return Collections.unmodifiableSortedSet(completeBackbone);
     }
@@ -161,19 +159,13 @@ public class Backbone {
     public SortedMap<Variable, Tristate> toMap() {
         final SortedMap<Variable, Tristate> map = new TreeMap<>();
         if (hasPositiveBackboneResult()) {
-            for (final Variable var : this.positiveBackbone) {
-                map.put(var, Tristate.TRUE);
-            }
+            this.positiveBackbone.forEach(b -> map.put(b, Tristate.TRUE));
         }
         if (hasNegativeBackboneResult()) {
-            for (final Variable var : this.negativeBackbone) {
-                map.put(var, Tristate.FALSE);
-            }
+            this.negativeBackbone.forEach(b -> map.put(b, Tristate.FALSE));
         }
         if (hasOptionalVariablesResult()) {
-            for (final Variable var : this.optionalVariables) {
-                map.put(var, Tristate.UNDEF);
-            }
+            this.optionalVariables.forEach(b -> map.put(b, Tristate.UNDEF));
         }
         return Collections.unmodifiableSortedMap(map);
     }

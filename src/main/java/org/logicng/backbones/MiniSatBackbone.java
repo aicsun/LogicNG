@@ -55,7 +55,7 @@ import java.util.TreeSet;
  * <p>
  * Reference: Algorithm 3 in M. Janota, I. Lynce, J. Marques-Silva, Algorithms for Computing Backbones of Propositional
  * Formulae, AI Communications, Volume 28(2), 161-177, 2015.
- * @version 1.5.1
+ * @version 2.0.0
  * @since 1.5.0
  */
 public class MiniSatBackbone extends MiniSat2Solver {
@@ -127,9 +127,7 @@ public class MiniSatBackbone extends MiniSat2Solver {
                 this.addClause(generateClauseVector(cnf), null);
                 break;
             case AND:
-                for (final Formula op : cnf) {
-                    this.addClause(generateClauseVector(op), null);
-                }
+                cnf.forEach(op -> this.addClause(generateClauseVector(op), null));
                 break;
             default:
                 throw new IllegalStateException("Unexpected formula type in CNF: " + cnf.type());
@@ -141,9 +139,7 @@ public class MiniSatBackbone extends MiniSat2Solver {
      * @param formulas the formulas
      */
     public void add(final Collection<Formula> formulas) {
-        for (final Formula formula : formulas) {
-            add(formula);
-        }
+        formulas.forEach(this::add);
     }
 
     /**
@@ -174,9 +170,7 @@ public class MiniSatBackbone extends MiniSat2Solver {
         this.candidates = new Stack<>();
         this.assumptions = new LNGIntVector(variables.size());
         this.backboneMap = new HashMap<>();
-        for (final Integer var : variables) {
-            this.backboneMap.put(var, Tristate.UNDEF);
-        }
+        variables.forEach(v -> this.backboneMap.put(v, Tristate.UNDEF));
     }
 
     /**
@@ -209,9 +203,9 @@ public class MiniSatBackbone extends MiniSat2Solver {
      * @return backbone
      */
     private Backbone buildBackbone(final Collection<Variable> variables) {
-        final SortedSet<Variable> posBackboneVars = isBothOrPositiveType() ? new TreeSet<Variable>() : null;
-        final SortedSet<Variable> negBackboneVars = isBothOrNegativeType() ? new TreeSet<Variable>() : null;
-        final SortedSet<Variable> optionalVars = isBothType() ? new TreeSet<Variable>() : null;
+        final SortedSet<Variable> posBackboneVars = isBothOrPositiveType() ? new TreeSet<>() : null;
+        final SortedSet<Variable> negBackboneVars = isBothOrNegativeType() ? new TreeSet<>() : null;
+        final SortedSet<Variable> optionalVars = isBothType() ? new TreeSet<>() : null;
         for (final Variable var : variables) {
             final Integer idx = this.name2idx.get(var.name());
             if (idx == null) {

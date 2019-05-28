@@ -36,13 +36,14 @@ import org.logicng.formulas.PBConstraint;
 import org.logicng.formulas.Variable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
  * A depth-first-search BDD variable ordering.  Traverses the formula in a DFS manner
  * and gathers all variables in the occurrence.
- * @version 1.4.0
+ * @version 2.0.0
  * @since 1.4.0
  */
 public class DFSOrdering implements VariableOrderingProvider {
@@ -75,10 +76,7 @@ public class DFSOrdering implements VariableOrderingProvider {
                 }
                 break;
             case PBC:
-                final PBConstraint pbc = (PBConstraint) formula;
-                for (final Literal lit : pbc.operands()) {
-                    variables.add(lit.variable());
-                }
+                Arrays.stream(((PBConstraint) formula).operands()).forEach(l -> variables.add(l.variable()));
                 break;
         }
     }

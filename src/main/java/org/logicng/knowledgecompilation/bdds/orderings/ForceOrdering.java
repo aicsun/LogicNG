@@ -33,6 +33,7 @@ import org.logicng.formulas.Variable;
 import org.logicng.graphs.datastructures.Hypergraph;
 import org.logicng.graphs.datastructures.HypergraphNode;
 import org.logicng.graphs.generators.HypergraphGenerator;
+import org.logicng.predicates.CNFPredicate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,7 +50,7 @@ import java.util.stream.Collectors;
 /**
  * Simple implementation of the FORCE BDD variable ordering due to Aloul, Markov, and Sakallah.  This ordering only
  * works for CNF formulas.  A formula has to be converted to CNF before this ordering is called.
- * @version 1.4.0
+ * @version 2.0.0
  * @since 1.4.0
  */
 public class ForceOrdering implements VariableOrderingProvider {
@@ -124,7 +125,7 @@ public class ForceOrdering implements VariableOrderingProvider {
     private LinkedHashMap<HypergraphNode<Variable>, Integer> orderingFromTentativeNewLocations(final LinkedHashMap<HypergraphNode<Variable>, Double> newLocations) {
         final LinkedHashMap<HypergraphNode<Variable>, Integer> ordering = new LinkedHashMap<>();
         final List<Map.Entry<HypergraphNode<Variable>, Double>> list = new ArrayList<>(newLocations.entrySet());
-        Collections.sort(list, COMPARATOR);
+        list.sort(COMPARATOR);
         int count = 0;
         for (final Map.Entry<HypergraphNode<Variable>, Double> entry : list) {
             ordering.put(entry.getKey(), count++);
@@ -141,5 +142,4 @@ public class ForceOrdering implements VariableOrderingProvider {
     private boolean shouldProceed(final Map<HypergraphNode<Variable>, Integer> lastOrdering, final Map<HypergraphNode<Variable>, Integer> currentOrdering) {
         return !lastOrdering.equals(currentOrdering);
     }
-
 }
